@@ -127,7 +127,7 @@
                                             ></span>
                                             {% if swatch_type == 'variant_image' and variant.image %}
                                                 <span class="expand">
-                                                    <img srcset="{{ variant.image.src | product_img_url: '75x'}}" src="{{ variant.image.src | product_img_url: '75x'}}" sizes="75px"{% if settings.enable_lazyload %} loading="lazy"{% endif %}>
+                                                    <img srcset="{{ variant.image.src | product_img_url: '75x'}}" src="{{ variant.image.src | product_img_url: '75x'}}" sizes="75px"{% if settings.enable_lazyload %} loading="lazy"{% endif %} width="" height="">
                                                 </span>
                                             {% endif %}
                                         </label>

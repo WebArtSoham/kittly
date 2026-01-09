@@ -1122,6 +1122,42 @@
   <!-- Quantity Matrix Container -->
   <div id="quantity-matrix"></div>
 
+  {%- for option in product.options_with_values -%}
+  <fieldset class="js product-form__input product-form__input--swatch">
+    <legend class="form__label">{{ option.name }}</legend>
+    
+    {%- for value in option.values -%}
+      {%- liquid
+        assign swatch_focal_point = null
+        if value.swatch.image
+          assign swatch_value = value.swatch.image | image_url: width: 50
+        elsif value.swatch.color
+          assign swatch_value = value.swatch.color.rgb
+        else
+          assign swatch_value = nil
+        endif
+      -%}
+
+      <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+        name="{{ option.name }}"
+        value="{{ value | escape }}"
+        form="{{ product_form_id }}"
+        {% if option.selected_value == value %}checked{% endif %}
+        class="swatch-input"
+      />
+      
+      <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" 
+        class="swatch-input__label"
+        style="--swatch--background: {% if value.swatch.image %}url({{ swatch_value }}){% else %}rgb({{ swatch_value }}){% endif %};"
+        title="{{ value }}"
+      >
+        <span class="visually-hidden">{{ value }}</span>
+      </label>
+    {%- endfor -%}
+  </fieldset>
+{%- endfor -%}
+
+
   <!-- Totals & Errors -->
   <div class="bulk-totals">
     <p><strong>Total Quantity:</strong> <span id="total-quantity">0</span> (Minimum 20)</p>
