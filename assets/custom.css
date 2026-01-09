@@ -1,3 +1,36 @@
+.login-item .form-select {
+    padding-top: 11px;
+    padding-bottom: 10px;
+    max-width: 450px;
+}
+.form-select {
+    flex-grow: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    font-family: var(--font-body-family);
+    font-size: var(--font-body-size);
+    font-weight: var(--font-weight-normal);
+    letter-spacing: var(--body-letter-spacing);
+    line-height: var(--body-line-height);
+    text-align: left;
+    border: 1px solid var(--form-input-border);
+    color: var(--form-input-color);
+    background-color: var(--form-input-bg);
+    box-shadow: unset!important;
+    outline: none!important;
+    padding-top: var(--btn-1-padding-top);
+    padding-bottom: var(--btn-1-padding-bottom);
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--btn-1-border-radius);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 .custom-print-section {
   max-width: 800px;
   margin: 30px auto;

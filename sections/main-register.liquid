@@ -146,6 +146,11 @@
               </select>
             </div>
 
+            <div class="form-field">
+              <label class="form-label" for="customer_callDateTime">Book a Call</label>
+              <input type="datetime-local" name="customer[note][Call Date & Time]" id="customer_callDateTime"  class="form-input" placeholder="Select date and time"/>
+            </div>
+
             <div class="form-field{% if form.errors contains "password" %} form-field--error{% endif %}">
               <label class="form-label" for="password">
                 {{ 'customer.register.you_password' | t }}

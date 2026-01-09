@@ -58,7 +58,7 @@
     <script>
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
     </script>
-
+    {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" defer></script> {% endcomment %}
     <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
 
     {%- liquid
@@ -170,8 +170,7 @@
 
     {%- if settings.use_custom_js -%}
     {%- endif -%}
-    {{ 'custom.js' | asset_url | script_tag }}
-
+    <script src="{{ 'custom.js' | asset_url }}" defer></script>
 
     <div class="background-overlay">
       {%- if settings.show_effect_close -%}
