@@ -106,131 +106,46 @@
                 placeholder=""
                 required>
             </div>
-<!-- Hidden field to combine all data -->
-<input type="hidden" name="customer[note]" id="customer_note_combined" />
-
-<!-- Telephone Number -->
-<div class="form-field">
-  <label class="form-label" for="customer_phone">
-    Telephone Number <em>*</em>
-  </label>
-  <input
-    type="tel"
-    name="customer[phone]"
-    id="customer_phone"
-    required
-    placeholder="+1 (555) 123-4567"
-    class="form-input" />
-</div>
-
-<!-- User Type -->
-<div class="form-field">
-  <label class="form-label" for="user_type">
-    User Type <em>*</em>
-  </label>
-  <select
-    name="user_type"
-    id="user_type"
-    required
-    class="form-select">
-    <option value="">Select user type</option>
-    <option value="Retailer">Retailer</option>
-    <option value="Wholesaler">Wholesaler</option>
-    <option value="Distributor">Distributor</option>
-    <option value="Other">Other</option>
-  </select>
-</div>
-
-<!-- Company Name -->
-<div class="form-field">
-  <label class="form-label" for="customer_company">
-    Company Name <em>*</em>
-  </label>
-  <input
-    type="text"
-    name="customer[company_name]"
-    id="customer_company"
-    required
-    class="form-input" />
-</div>
-
-<!-- Company Size -->
-<div class="form-field">
-  <label class="form-label" for="customer_company_size">
-    Company Size <em>*</em>
-  </label>
-  <select
-    name="company_size"
-    id="customer_company_size"
-    required
-    class="form-select">
-    <option value="">Select company size</option>
-    <option value="1-10">1-10 employees</option>
-    <option value="11-50">11-50 employees</option>
-    <option value="51-200">51-200 employees</option>
-    <option value="201-500">201-500 employees</option>
-    <option value="501-1000">501-1000 employees</option>
-    <option value="1000+">1000+ employees</option>
-  </select>
-</div>
-
-<!-- Average Annual Merchandise Spend -->
-<div class="form-field">
-  <label class="form-label" for="customer_annual_spend">
-    Average Annual Merchandise Spend <em>*</em>
-  </label>
-  <select
-    name="annual_spend"
-    id="customer_annual_spend"
-    required
-    class="form-select">
-    <option value="">Select spending range</option>
-    <option value="$0 - $10,000">$0 - $10,000</option>
-    <option value="$10,000 - $50,000">$10,000 - $50,000</option>
-    <option value="$50,000 - $100,000">$50,000 - $100,000</option>
-    <option value="$100,000 - $250,000">$100,000 - $250,000</option>
-    <option value="$250,000 - $500,000">$250,000 - $500,000</option>
-    <option value="$500,000+">$500,000+</option>
-  </select>
-</div>
-
-<!-- Logo Upload Note -->
-<div class="form-field">
-  <label class="form-label" for="customer_logo_url">
-    Company Logo URL <em>*</em>
-  </label>
-  <input
-    type="url"
-    name="logo_url"
-    id="customer_logo_url"
-    placeholder="https://example.com/logo.png"
-    required
-    class="form-input" />
-  <small class="form-help-text">
-    Please provide a URL to your company logo
-  </small>
-</div>
+            <!-- Telephone Number -->
             <div class="form-field">
-              <label class="form-label" for="user_type">User Type
-                <em>*</em>
-              </label>
-              <select
-                id="user_type"
-                class="form-input form-input-placeholder"
-                required>
-                <option
-                  value=""
-                  disabled
-                  selected>Select user type</option>
-                <option value="Gold">Gold</option>
-                <option value="Silver">Silver</option>
-                <option value="Black">Black</option>
-              </select>
-              <input
-                type="hidden"
-                name="customer[note]"
-                id="customer_note" />
+              <label class="form-label" for="customer_phone">Telephone Number <em>*</em></label>
+              <input type="tel" name="customer[note][Telephone Number]" id="customer_phone" required placeholder="+1 (555) 123-4567" class="form-input" />
             </div>
+
+            <!-- Company Name -->
+            <div class="form-field">
+              <label class="form-label" for="customer_company">Company Name <em>*</em></label>
+              <input type="text" name="customer[note][Company Name]" id="customer_company" required class="form-input" />
+            </div>
+
+            <!-- Company Size -->
+            <div class="form-field">
+              <label class="form-label" for="customer_company_size">Company Size <em>*</em></label>
+              <select name="customer[note][Company Size]" id="customer_company_size" required class="form-select">
+                <option value="">Select company size</option>
+                <option value="1-10 employees">1-10 employees</option>
+                <option value="11-50 employees">11-50 employees</option>
+                <option value="51-200 employees">51-200 employees</option>
+                <option value="201-500 employees">201-500 employees</option>
+                <option value="501-1000 employees">501-1000 employees</option>
+                <option value="1000+ employees">1000+ employees</option>
+              </select>
+            </div>
+
+            <!-- Average Annual Merchandise Spend -->
+            <div class="form-field">
+              <label class="form-label" for="customer_annual_spend">Average Annual Merchandise Spend <em>*</em></label>
+              <select name="customer[note][Average Annual Merchandise Spend]" id="customer_annual_spend" required class="form-select">
+                <option value="">Select spending range</option>
+                <option value="$0 - $10,000">$0 - $10,000</option>
+                <option value="$10,000 - $50,000">$10,000 - $50,000</option>
+                <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                <option value="$100,000 - $250,000">$100,000 - $250,000</option>
+                <option value="$250,000 - $500,000">$250,000 - $500,000</option>
+                <option value="$500,000+">$500,000+</option>
+              </select>
+            </div>
+
             <div class="form-field{% if form.errors contains "password" %} form-field--error{% endif %}">
               <label class="form-label" for="password">
                 {{ 'customer.register.you_password' | t }}
