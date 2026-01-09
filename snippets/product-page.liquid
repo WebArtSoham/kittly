@@ -1006,14 +1006,6 @@
                                                 %}
                                             </div>
                                         {% endunless %}
-
-
-                                        
-{% comment %} Inject reliable product JSON for JS {% endcomment %}
-<script type="application/json" id="custom-product-json">
-  {{ product | json }}
-</script>
-
 <div class="custom-print-section">
   <h3>Select Printing & Decoration Options</h3>
 
@@ -1122,34 +1114,52 @@
   <!-- Quantity Matrix Container -->
   <div id="quantity-matrix"></div>
 
-  {%- for option in product.options_with_values -%}
+{%- for option in product.options_with_values -%}
   <fieldset class="js product-form__input product-form__input--swatch">
-    <legend class="form__label">{{ option.name }}</legend>
+    <legend class="form__label">{{ option.name }}:</legend>
     
     {%- for value in option.values -%}
       {%- liquid
-        assign swatch_focal_point = null
-        if value.swatch.image
-          assign swatch_value = value.swatch.image | image_url: width: 50
-        elsif value.swatch.color
-          assign swatch_value = value.swatch.color.rgb
-        else
-          assign swatch_value = nil
+        assign metaobject_color = value.swatch.color
+        assign metaobject_image = value.swatch.image
+        assign has_image = false
+        assign background_style = ''
+
+        if metaobject_image != blank
+          assign swatch_image_url = metaobject_image | image_url: width: 100
+          assign background_style = 'url(' | append: swatch_image_url | append: ')'
+          assign has_image = true
+        elsif metaobject_color != blank
+          assign background_style = metaobject_color
         endif
       -%}
 
-      <input type="radio" id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+      {%- comment -%}Find a variant that matches this value to check availability{%- endcomment -%}
+      {%- assign option_available = false -%}
+      {%- for variant in product.variants -%}
+        {%- if variant.options[option.index0] == value and variant.available -%}
+          {%- assign option_available = true -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <input type="radio"
+        id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
         name="{{ option.name }}"
         value="{{ value | escape }}"
-        form="{{ product_form_id }}"
+        form="{{ product_form_id | default: 'product-form' }}"
         {% if option.selected_value == value %}checked{% endif %}
         class="swatch-input"
+        {% unless option_available %}disabled{% endunless %}
       />
       
-      <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" 
-        class="swatch-input__label"
-        style="--swatch--background: {% if value.swatch.image %}url({{ swatch_value }}){% else %}rgb({{ swatch_value }}){% endif %};"
-        title="{{ value }}"
+      <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+        class="swatch-label {% unless option_available %}soldout{% endunless %}"
+        title="{{ value | escape }}"
+        style="background-image: {% if has_image %}url({{ swatch_image_url }}){% endif %};
+               background-color: {% unless has_image %}{{ background_style }}{% endunless %};
+               background-size: cover;
+               background-position: center;"
       >
         <span class="visually-hidden">{{ value }}</span>
       </label>
@@ -1167,7 +1177,7 @@
 
   <!-- Preview & Add to Cart -->
   <div class="product-image-preview">
-    <img src="https://placehold.co//50x50?text=Your+Product+Preview" alt="Product preview" width="" height="" />
+    <img src="https://placehold.co/50x50?text=Your+Product+Preview" alt="Product preview" width="" height="" />
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. ... <a href="#">Learn More...</a></p>
   </div>
 
