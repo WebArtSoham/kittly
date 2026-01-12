@@ -424,10 +424,10 @@ input:checked + .slider:before {
   background: #fff;
 }
 
-.size-item.soldout {
+/* .size-item.soldout {
   opacity: 0.5;
   background: #f5f5f5;
-}
+} */
 
 .size-label {
   font-weight: 600;

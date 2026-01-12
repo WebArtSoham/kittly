@@ -1115,112 +1115,113 @@
     </div>
   </div>
 
-{%- for option in product.options_with_values -%}
-  <fieldset class="js product-form__input product-form__input--swatch">
-    <legend class="form__label">{{ option.name }}:</legend>
-    
-    {%- for value in option.values -%}
-      {%- liquid
-        assign metaobject_color = value.swatch.color
-        assign metaobject_image = value.swatch.image
-        assign has_image = false
-        assign background_color = ''
-        assign background_image = ''
-
-        if metaobject_image != blank
-          assign swatch_image_url = metaobject_image | image_url: width: 100
-          assign background_image = swatch_image_url
-          assign has_image = true
-        elsif metaobject_color != blank
-          assign background_color = metaobject_color
-        endif
+    {%- for option in product.options_with_values -%}
+    <fieldset class="js product-form__input product-form__input--swatch">
+        <legend class="form__label">{{ option.name }}:</legend>
         
-        assign option_available = false
-        assign option_index = option.position | minus: 1
-        for variant in product.variants
-          if variant.options[option_index] == value and variant.available
-            assign option_available = true
-            break
-          endif
-        endfor
-      -%}
+        {%- for value in option.values -%}
+        {%- liquid
+            assign metaobject_color = value.swatch.color
+            assign metaobject_image = value.swatch.image
+            assign has_image = false
+            assign background_color = ''
+            assign background_image = ''
 
-      <input type="radio"
-        id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-        name="{{ option.name }}"
-        value="{{ value | escape }}"
-        form="{{ product_form_id | default: 'product-form' }}"
-        {% if option.selected_value == value %}checked{% endif %}
-        class="swatch-input"
-        data-option-value="{{ value | escape }}"
-        data-option-name="{{ option.name | escape }}"
-        {% unless option_available %}disabled{% endunless %}
-      />
-      
-      <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-        class="swatch-label {% unless option_available %}soldout{% endunless %}"
-        title="{{ value | escape }}"
-        style="{% if has_image %}background-image: url({{ background_image }});{% else %}background-color: {{ background_color }};{% endif %} background-size: cover; background-position: center;"
-      >
-        <span class="visually-hidden">{{ value }}</span>
-      </label>
+            if metaobject_image != blank
+            assign swatch_image_url = metaobject_image | image_url: width: 100
+            assign background_image = swatch_image_url
+            assign has_image = true
+            elsif metaobject_color != blank
+            assign background_color = metaobject_color
+            endif
+            
+            assign option_available = false
+            assign option_index = option.position | minus: 1
+            for variant in product.variants
+            if variant.options[option_index] == value and variant.available
+                assign option_available = true
+                break
+            endif
+            endfor
+        -%}
+
+        <input type="radio"
+            id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+            name="{{ option.name }}"
+            value="{{ value | escape }}"
+            form="{{ product_form_id | default: 'product-form' }}"
+            {% if option.selected_value == value %}checked{% endif %}
+            class="swatch-input"
+            data-option-value="{{ value | escape }}"
+            data-option-name="{{ option.name | escape }}"
+            {% unless option_available %}disabled{% endunless %}
+        />
+        
+        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+            class="swatch-label {% unless option_available %}soldout{% endunless %}"
+            title="{{ value | escape }}"
+            style="{% if has_image %}background-image: url({{ background_image }});{% else %}background-color: {{ background_color }};{% endif %} background-size: cover; background-position: center;"
+        >
+            <span class="visually-hidden">{{ value }}</span>
+        </label>
+        {%- endfor -%}
+    </fieldset>
     {%- endfor -%}
-  </fieldset>
-{%- endfor -%}
 
-{%- comment -%} Size Availability Tables Container {%- endcomment -%}
-<div class="size-availability-container" style="margin-top: 20px;">
-  {%- for option in product.options_with_values -%}
-    {%- if option.name == 'Color' or option.name == 'Colour' -%}
-      {%- assign color_option_index = option.position | minus: 1 -%}
-      {%- for color_value in option.values -%}
-        <div class="size-table" data-color="{{ color_value | escape }}" style="display: none;">
-          <div class="size-table-header">
-            <h4>{{ color_value }}</h4>
-            <button type="button" class="remove-color-btn" data-color="{{ color_value | escape }}" aria-label="Remove {{ color_value }}">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </button>
-          </div>
-          <div class="size-options">
-            {%- for size_option in product.options_with_values -%}
-              {%- if size_option.name == 'Size' -%}
-                {%- assign size_option_index = size_option.position | minus: 1 -%}
-                {%- for size_value in size_option.values -%}
-                  {%- liquid
-                    assign size_available = false
-                    assign size_quantity = 0
-                    for variant in product.variants
-                      if variant.options[color_option_index] == color_value and variant.options[size_option_index] == size_value
-                        if variant.available
-                          assign size_available = true
-                          assign size_quantity = variant.inventory_quantity
+    {%- comment -%} Size Availability Tables Container {%- endcomment -%}
+    <div class="size-availability-container" style="margin-top: 20px;">
+    {%- for option in product.options_with_values -%}
+        {%- if option.name == 'Color' or option.name == 'Colour' -%}
+        {%- assign color_option_index = option.position | minus: 1 -%}
+        {%- for color_value in option.values -%}
+            <div class="size-table" data-color="{{ color_value | escape }}" style="display: none;">
+            <div class="size-table-header">
+                <h4>{{ color_value }}</h4>
+                <button type="button" class="remove-color-btn" data-color="{{ color_value | escape }}" aria-label="Remove {{ color_value }}">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                </button>
+            </div>
+            <div class="size-options">
+                {%- for size_option in product.options_with_values -%}
+                {%- if size_option.name == 'Size' -%}
+                    {%- assign size_option_index = size_option.position | minus: 1 -%}
+                    {%- for size_value in size_option.values -%}
+                    {%- liquid
+                        assign size_available = false
+                        assign size_quantity = 0
+                        for variant in product.variants
+                        if variant.options[color_option_index] == color_value and variant.options[size_option_index] == size_value
+                            if variant.available
+                            assign size_available = true
+                            assign size_quantity = variant.inventory_quantity
+                            endif
+                            break
                         endif
-                        break
-                      endif
-                    endfor
-                  -%}
-                  
-                  <div class="size-item {% unless size_available %}soldout{% endunless %}">
-                    <div class="size-label">{{ size_value }}</div>
-                    <div class="size-quantity">
-                      {% if size_available %}
-                        {{ size_quantity }}+ in stock
-                      {% else %}
-                        Out of stock
-                      {% endif %}
+                        endfor
+                    -%}
+                    
+                    <div class="size-item {% unless size_available %}soldout{% endunless %}">
+                        <input type="text" name="sizequantity" id="sizequantity" required/>
+                        <div class="size-label">{{ size_value }}</div>
+                        <div class="size-quantity">
+                        {% if size_available %}
+                            {{ size_quantity }}+ in stock
+                        {% else %}
+                            Out of stock
+                        {% endif %}
+                        </div>
                     </div>
-                  </div>
+                    {%- endfor -%}
+                {%- endif -%}
                 {%- endfor -%}
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
-        </div>
-      {%- endfor -%}
-    {%- endif -%}
-  {%- endfor -%}
-</div>
+            </div>
+            </div>
+        {%- endfor -%}
+        {%- endif -%}
+    {%- endfor -%}
+    </div>
 
   <!-- Totals & Errors -->
   <div class="bulk-totals">
