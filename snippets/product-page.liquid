@@ -1006,6 +1006,10 @@
                                                 %}
                                             </div>
                                         {% endunless %}
+<script type="application/json" id="ProductJson-{{ section.id }}">
+  {{ product.variants | json }}
+</script>
+
 <div class="custom-print-section">
   <h3>Select Printing & Decoration Options</h3>
 
@@ -1111,9 +1115,6 @@
     </div>
   </div>
 
-  <!-- Quantity Matrix Container -->
-  <div id="quantity-matrix"></div>
-
 {%- for option in product.options_with_values -%}
   <fieldset class="js product-form__input product-form__input--swatch">
     <legend class="form__label">{{ option.name }}:</legend>
@@ -1123,25 +1124,26 @@
         assign metaobject_color = value.swatch.color
         assign metaobject_image = value.swatch.image
         assign has_image = false
-        assign background_style = ''
+        assign background_color = ''
+        assign background_image = ''
 
         if metaobject_image != blank
           assign swatch_image_url = metaobject_image | image_url: width: 100
-          assign background_style = 'url(' | append: swatch_image_url | append: ')'
+          assign background_image = swatch_image_url
           assign has_image = true
         elsif metaobject_color != blank
-          assign background_style = metaobject_color
+          assign background_color = metaobject_color
         endif
+        
+        assign option_available = false
+        assign option_index = option.position | minus: 1
+        for variant in product.variants
+          if variant.options[option_index] == value and variant.available
+            assign option_available = true
+            break
+          endif
+        endfor
       -%}
-
-      {%- comment -%}Find a variant that matches this value to check availability{%- endcomment -%}
-      {%- assign option_available = false -%}
-      {%- for variant in product.variants -%}
-        {%- if variant.options[option.index0] == value and variant.available -%}
-          {%- assign option_available = true -%}
-          {%- break -%}
-        {%- endif -%}
-      {%- endfor -%}
 
       <input type="radio"
         id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
@@ -1156,17 +1158,13 @@
       <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
         class="swatch-label {% unless option_available %}soldout{% endunless %}"
         title="{{ value | escape }}"
-        style="background-image: {% if has_image %}url({{ swatch_image_url }}){% endif %};
-               background-color: {% unless has_image %}{{ background_style }}{% endunless %};
-               background-size: cover;
-               background-position: center;"
+        style="{% if has_image %}background-image: url({{ background_image }});{% else %}background-color: {{ background_color }};{% endif %} background-size: cover; background-position: center;"
       >
         <span class="visually-hidden">{{ value }}</span>
       </label>
     {%- endfor -%}
   </fieldset>
 {%- endfor -%}
-
 
   <!-- Totals & Errors -->
   <div class="bulk-totals">

@@ -1,3 +1,8 @@
+if (window.location.pathname === "/account/register") {
+  window.location.replace("https://kittly.com/pages/register");
+  console.log("URL Redirected");
+}
+
 // Track selections
 let selectedPrintingMethod = null;
 const selectedDisplay = document.getElementById('selected-option');
