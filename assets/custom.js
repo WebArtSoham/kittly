@@ -1,7 +1,7 @@
-if (window.location.pathname === "/account/register") {
-  window.location.replace("https://kittly.com/pages/register");
-  console.log("URL Redirected");
-}
+// if (window.location.pathname === "/account/register") {
+//   window.location.replace("https://kittly.com/pages/register");
+//   console.log("URL Redirected");
+// }
 
 // Track selections
 let selectedPrintingMethod = null;
@@ -123,34 +123,63 @@ addButton.addEventListener('click', async () => {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  const swatchInputs = document.querySelectorAll('.swatch-input');
+  const swatchInputs = document.querySelectorAll('.swatch-input[data-option-name="Color"], .swatch-input[data-option-name="Colour"]');
   const sizeTables = document.querySelectorAll('.size-table');
+  const removeButtons = document.querySelectorAll('.remove-color-btn');
   
-  function updateSizeTable() {
-    // Find the selected color
-    const selectedColor = document.querySelector('.swatch-input[data-option-name="Color"]:checked, .swatch-input[data-option-name="Colour"]:checked');
+  // Track which colors are currently displayed
+  let displayedColors = new Set();
+  
+  function updateSizeTables() {
+    // Get all checked color swatches
+    const checkedColors = document.querySelectorAll('.swatch-input[data-option-name="Color"]:checked, .swatch-input[data-option-name="Colour"]:checked');
     
-    if (selectedColor) {
-      const colorValue = selectedColor.getAttribute('data-option-value');
-      
-      // Hide all size tables
-      sizeTables.forEach(table => {
+    checkedColors.forEach(colorInput => {
+      const colorValue = colorInput.getAttribute('data-option-value');
+      displayedColors.add(colorValue);
+    });
+    
+    // Show/hide tables based on displayedColors
+    sizeTables.forEach(table => {
+      const tableColor = table.getAttribute('data-color');
+      if (displayedColors.has(tableColor)) {
+        table.style.display = 'block';
+      } else {
         table.style.display = 'none';
-      });
-      
-      // Show the size table for the selected color
-      const activeTable = document.querySelector(`.size-table[data-color="${colorValue}"]`);
-      if (activeTable) {
-        activeTable.style.display = 'block';
       }
-    }
+    });
   }
   
-  // Add event listeners to all swatch inputs
+  // Add event listeners to color swatch inputs
   swatchInputs.forEach(input => {
-    input.addEventListener('change', updateSizeTable);
+    input.addEventListener('change', function() {
+      if (this.checked) {
+        const colorValue = this.getAttribute('data-option-value');
+        displayedColors.add(colorValue);
+        updateSizeTables();
+      }
+    });
   });
   
-  // Show the initially selected color's size table
-  updateSizeTable();
+  // Add event listeners to remove buttons
+  removeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const colorValue = this.getAttribute('data-color');
+      
+      // Remove from displayed colors
+      displayedColors.delete(colorValue);
+      
+      // Uncheck the corresponding swatch
+      const correspondingSwatch = document.querySelector(`.swatch-input[data-option-value="${colorValue}"]`);
+      if (correspondingSwatch) {
+        correspondingSwatch.checked = false;
+      }
+      
+      // Update display
+      updateSizeTables();
+    });
+  });
+  
+  // Show initially selected colors
+  updateSizeTables();
 });

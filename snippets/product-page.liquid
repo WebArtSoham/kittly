@@ -1168,14 +1168,21 @@
   </fieldset>
 {%- endfor -%}
 
-{%- comment -%} Size Availability Table {%- endcomment -%}
-<div class="size-availability-table" style="margin-top: 20px;">
+{%- comment -%} Size Availability Tables Container {%- endcomment -%}
+<div class="size-availability-container" style="margin-top: 20px;">
   {%- for option in product.options_with_values -%}
     {%- if option.name == 'Color' or option.name == 'Colour' -%}
       {%- assign color_option_index = option.position | minus: 1 -%}
       {%- for color_value in option.values -%}
         <div class="size-table" data-color="{{ color_value | escape }}" style="display: none;">
-          <h4>{{ color_value }}</h4>
+          <div class="size-table-header">
+            <h4>{{ color_value }}</h4>
+            <button type="button" class="remove-color-btn" data-color="{{ color_value | escape }}" aria-label="Remove {{ color_value }}">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
           <div class="size-options">
             {%- for size_option in product.options_with_values -%}
               {%- if size_option.name == 'Size' -%}
