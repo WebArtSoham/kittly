@@ -424,10 +424,21 @@ input:checked + .slider:before {
   background: #fff;
 }
 
-/* .size-item.soldout {
+.size-item.soldout {
   opacity: 0.5;
   background: #f5f5f5;
-} */
+}
+
+.size-quantity-input {
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
 
 .size-label {
   font-weight: 600;
@@ -438,4 +449,15 @@ input:checked + .slider:before {
 .size-quantity {
   font-size: 12px;
   color: #666;
+}
+
+.swatch-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.swatch-input:checked + .swatch-label {
+  border: 2px solid #000;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
 }

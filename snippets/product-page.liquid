@@ -1056,7 +1056,6 @@
   <div class="option-group">
     <label><strong>Choose Decoration On Right Hand Sleeve</strong></label>
     <select id="decoration-right" class="decoration-select">
-      <!-- Same options as back -->
       <option value="">Select an option...</option>
       <option value="NONE">NONE</option>
       <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
@@ -1077,7 +1076,6 @@
   <div class="option-group">
     <label><strong>Choose Decoration On Left Hand Sleeve</strong></label>
     <select id="decoration-left" class="decoration-select">
-      <!-- Same options -->
       <option value="">Select an option...</option>
       <option value="NONE">NONE</option>
       <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
@@ -1145,12 +1143,11 @@
             endfor
         -%}
 
-        <input type="radio"
+        <input type="checkbox"
             id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
             name="{{ option.name }}"
             value="{{ value | escape }}"
             form="{{ product_form_id | default: 'product-form' }}"
-            {% if option.selected_value == value %}checked{% endif %}
             class="swatch-input"
             data-option-value="{{ value | escape }}"
             data-option-name="{{ option.name | escape }}"
@@ -1191,19 +1188,34 @@
                     {%- liquid
                         assign size_available = false
                         assign size_quantity = 0
+                        assign variant_id = ''
+                        assign variant_price = 0
                         for variant in product.variants
                         if variant.options[color_option_index] == color_value and variant.options[size_option_index] == size_value
                             if variant.available
                             assign size_available = true
                             assign size_quantity = variant.inventory_quantity
+                            assign variant_id = variant.id
+                            assign variant_price = variant.price
                             endif
                             break
                         endif
                         endfor
                     -%}
                     
-                    <div class="size-item {% unless size_available %}soldout{% endunless %}">
-                        <input type="text" name="sizequantity" id="sizequantity" required/>
+                    <div class="size-item {% unless size_available %}soldout{% endunless %}" 
+                         data-variant-id="{{ variant_id }}" 
+                         data-variant-price="{{ variant_price }}"
+                         data-color="{{ color_value | escape }}"
+                         data-size="{{ size_value | escape }}">
+                        <input type="number" 
+                               class="size-quantity-input" 
+                               min="0" 
+                               value="0"
+                               placeholder="0"
+                               data-variant-id="{{ variant_id }}"
+                               data-variant-price="{{ variant_price }}"
+                               {% unless size_available %}disabled{% endunless %} />
                         <div class="size-label">{{ size_value }}</div>
                         <div class="size-quantity">
                         {% if size_available %}
@@ -1236,8 +1248,8 @@
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. ... <a href="#">Learn More...</a></p>
   </div>
 
-  <button type="button" id="add-to-cart-with-print" class="btn add-to-cart-btn" disabled>
-    Add to Cart with Custom Printing
+  <button type="button" id="add-to-cart-with-print" class="btn add-to-cart-btn">
+    Submit
   </button>
 
   <p id="status-message" style="margin-top: 15px; font-weight: bold;"></p>
