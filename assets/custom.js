@@ -121,3 +121,36 @@ addButton.addEventListener('click', async () => {
     statusMessage.style.color = 'red';
   }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const swatchInputs = document.querySelectorAll('.swatch-input');
+  const sizeTables = document.querySelectorAll('.size-table');
+  
+  function updateSizeTable() {
+    // Find the selected color
+    const selectedColor = document.querySelector('.swatch-input[data-option-name="Color"]:checked, .swatch-input[data-option-name="Colour"]:checked');
+    
+    if (selectedColor) {
+      const colorValue = selectedColor.getAttribute('data-option-value');
+      
+      // Hide all size tables
+      sizeTables.forEach(table => {
+        table.style.display = 'none';
+      });
+      
+      // Show the size table for the selected color
+      const activeTable = document.querySelector(`.size-table[data-color="${colorValue}"]`);
+      if (activeTable) {
+        activeTable.style.display = 'block';
+      }
+    }
+  }
+  
+  // Add event listeners to all swatch inputs
+  swatchInputs.forEach(input => {
+    input.addEventListener('change', updateSizeTable);
+  });
+  
+  // Show the initially selected color's size table
+  updateSizeTable();
+});

@@ -1152,6 +1152,8 @@
         form="{{ product_form_id | default: 'product-form' }}"
         {% if option.selected_value == value %}checked{% endif %}
         class="swatch-input"
+        data-option-value="{{ value | escape }}"
+        data-option-name="{{ option.name | escape }}"
         {% unless option_available %}disabled{% endunless %}
       />
       
@@ -1165,6 +1167,53 @@
     {%- endfor -%}
   </fieldset>
 {%- endfor -%}
+
+{%- comment -%} Size Availability Table {%- endcomment -%}
+<div class="size-availability-table" style="margin-top: 20px;">
+  {%- for option in product.options_with_values -%}
+    {%- if option.name == 'Color' or option.name == 'Colour' -%}
+      {%- assign color_option_index = option.position | minus: 1 -%}
+      {%- for color_value in option.values -%}
+        <div class="size-table" data-color="{{ color_value | escape }}" style="display: none;">
+          <h4>{{ color_value }}</h4>
+          <div class="size-options">
+            {%- for size_option in product.options_with_values -%}
+              {%- if size_option.name == 'Size' -%}
+                {%- assign size_option_index = size_option.position | minus: 1 -%}
+                {%- for size_value in size_option.values -%}
+                  {%- liquid
+                    assign size_available = false
+                    assign size_quantity = 0
+                    for variant in product.variants
+                      if variant.options[color_option_index] == color_value and variant.options[size_option_index] == size_value
+                        if variant.available
+                          assign size_available = true
+                          assign size_quantity = variant.inventory_quantity
+                        endif
+                        break
+                      endif
+                    endfor
+                  -%}
+                  
+                  <div class="size-item {% unless size_available %}soldout{% endunless %}">
+                    <div class="size-label">{{ size_value }}</div>
+                    <div class="size-quantity">
+                      {% if size_available %}
+                        {{ size_quantity }}+ in stock
+                      {% else %}
+                        Out of stock
+                      {% endif %}
+                    </div>
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+</div>
 
   <!-- Totals & Errors -->
   <div class="bulk-totals">
