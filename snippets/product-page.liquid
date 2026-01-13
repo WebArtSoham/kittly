@@ -1113,8 +1113,8 @@
   </div>
 
   <!-- Bulk Quantity Header -->
-  <div class="bulk-quantity-header">
-    <h3>Choose Product Quantity & Colour</h3>
+  <div class="option-group">
+    <strong><label>Choose Product Quantity & Colour</strong></label>
     <a href="#" class="size_btn">Size Guide</a>
   </div>
 
@@ -1134,7 +1134,7 @@
   </div>
 
     {%- for option in product.options_with_values -%}
-    <fieldset class="js product-form__input product-form__input--swatch">
+    <fieldset class="js product-form__input product-form__input--swatch {{ option.name | downcase }}-swatch">
         <legend class="form__label">{{ option.name }}:</legend>
         
         {%- for value in option.values -%}

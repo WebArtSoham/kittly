@@ -46,14 +46,27 @@
 .option-group {
   margin-bottom: 25px;
 }
-
-.option-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #333;
+@media (min-width: 1200px) {
+.halo-productView-left {
+    width: 52.4%;
 }
-
+.halo-productView-right {
+    width: 46.6%;
+}
+}
+.option-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 18px;
+    background-color: #000;
+    border-radius: 5px;
+    padding: 8px 10px;
+}
+.option-group .decoration-select{
+  border-radius: 30px
+}
 .print-options-list {
   list-style: none;
   padding: 0;
@@ -90,60 +103,75 @@
    Tooltip
 ───────────────────────────────────────────── */
 .has-tooltip {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 6px;                     /* space between text and ? */
+  position: relative;
 }
 
 .tooltip-trigger {
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
   text-align: center;
-  background: #666;
+  background: #555;
   color: white;
   border-radius: 50%;
   font-size: 12px;
   font-weight: bold;
   cursor: help;
+  transition: background 0.15s;
 }
 
+.tooltip-trigger:hover {
+  background: #777;
+}
+
+/* Tooltip styling */
 .custom-tooltip {
   visibility: hidden;
   opacity: 0;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  width: 280px;
+  bottom: -10px;                /* below the trigger */
+  background: #1e1e1e;
+  color: #f0f0f0;
   padding: 12px 16px;
-  background: #2c2c2e;
-  color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+  z-index: 100;
+  width: 280px;
   font-size: 13px;
   line-height: 1.5;
-  border-radius: 6px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-  z-index: 100;
   pointer-events: none;
-  transition: opacity 0.2s ease, visibility 0.2s;
-  text-align: center;
+  transition: opacity 0.18s ease, visibility 0.18s;
+  text-align: left;
 }
 
-.custom-tooltip.bottom {
-  bottom: -10px;
+.custom-tooltip p {
+  margin: 0 0 10px;
 }
 
-.custom-tooltip.bottom::after {
+.custom-tooltip strong {
+  color: #ffcc00;
+}
+
+/* Arrow pointing up toward the ? */
+.custom-tooltip::after {
   content: "";
   position: absolute;
-  top: -8px;
+  bottom: -8px;                 /* arrow at bottom of tooltip */
   left: 50%;
   transform: translateX(-50%);
-  border: 8px solid transparent;
-  border-bottom-color: #2c2c2e;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #1e1e1e;
 }
 
-.has-tooltip:hover .custom-tooltip {
+/* SHOW TOOLTIP ONLY WHEN HOVERING THE ? */
+.tooltip-trigger:hover + .custom-tooltip {
   visibility: visible;
   opacity: 1;
 }
@@ -227,10 +255,31 @@ input:checked + .slider:before {
 }
 
 .bulk-quantity-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: self-start;
+    margin-bottom: 20px;
+    flex-direction: column;
+}
+.bulk-quantity-controls p{
+      display: flex;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    align-items: center;
+}
+.bulk-quantity-controls .multiple-toggle{
+      display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.bulk-quantity-controls .multiple-toggle .slider:before{
+  height: 16px;
+    width: 16px;
+}
+.bulk-quantity-controls .multiple-toggle .switch {
+    width: 44px;
+    height: 23px;
 }
 
 .bulk-quantity-controls input#desired-quantity,
@@ -239,7 +288,24 @@ input:checked + .slider:before {
   padding: 8px;
   font-size: 16px;
 }
-
+.bulk-quantity-controls input#desired-quantity{
+  width: 60px;
+  font-size: 18px;
+    font-weight: bold;
+  text-align: center;
+  text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.bulk-quantity-controls input#desired-quantity[type=number]::-webkit-inner-spin-button, .bulk-quantity-controls input#desired-quantity[type=number]::-webkit-outer-spin-button{
+ -webkit-appearance: none;
+    margin: 0;
+}
+.bulk-quantity-controls input#desired-quantity[type=number]{
+  -moz-appearance: textfield;
+}
 .color-quantity-section,
 .size-table {
   border: 2px solid #ddd;
@@ -311,9 +377,9 @@ input:checked + .slider:before {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin: 0 12px 12px 0;
+  width: 35px;
+  height: 35px;
+  margin: 0 10px 10px 0;
   border: 2px solid #e6e6e6;
   border-radius: 50%;
   cursor: pointer;
@@ -322,7 +388,9 @@ input:checked + .slider:before {
   overflow: hidden;
   position: relative;
 }
-
+.js.product-form__input.product-form__input--swatch legend.form__label, .productView-options{
+  display: none;
+}
 .swatch-input:checked + .swatch-label {
   border-color: #000;
   border-width: 3px;
