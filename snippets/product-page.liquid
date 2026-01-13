@@ -1017,14 +1017,34 @@
   <div class="option-group">
     <label><strong>Choose Decoration On Front <span style="color: red;">*</span></strong></label>
     <ul id="print-options" class="print-options-list">
-      <li data-value="Embroidery">Embroidery</li>
-      <li data-value="Full Colour Transfer Small">Full Colour Transfer Small</li>
-      <li data-value="Full Colour Transfer Medium">Full Colour Transfer Medium</li>
-      <li data-value="Full Colour Transfer Large">Full Colour Transfer Large</li>
-      <li data-value="1 Colour Screen Print">1 Colour Screen Print</li>
-      <li data-value="2 Colour Screen Print">2 Colour Screen Print</li>
-      <li data-value="3 Colour Screen Print">3 Colour Screen Print</li>
-      <li data-value="4 Colour Screen Print">4 Colour Screen Print</li>
+    <li data-value="Embroidery">Embroidery</li>
+    <li data-value="Full Colour Transfer Small">Full Colour Transfer Small</li>
+    <li data-value="Full Colour Transfer Medium">Full Colour Transfer Medium</li>
+    <li data-value="Full Colour Transfer Large">Full Colour Transfer Large</li>
+    <li data-value="1 Colour Screen Print">1 Colour Screen Print</li>
+    <li data-value="2 Colour Screen Print">2 Colour Screen Print</li>
+    
+    <!-- 3 Colour with tooltip -->
+    <li class="has-tooltip" data-value="3 Colour Screen Print">
+        3 Colour Screen Print
+        <span class="tooltip-trigger">?</span>
+        <div class="custom-tooltip bottom">
+        <p><strong>3 Colour Screen Print</strong></p>
+        <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p>
+        <img src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp" alt="Example of multi-color screen separation" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height=""/>
+        </div>
+    </li>
+    
+    <!-- 4 Colour with tooltip -->
+    <li class="has-tooltip" data-value="4 Colour Screen Print">
+        4 Colour Screen Print
+        <span class="tooltip-trigger">?</span>
+        <div class="custom-tooltip bottom">
+        <p><strong>4 Colour Screen Print</strong></p>
+        <p>Typically refers to CMYK process printing (Cyan, Magenta, Yellow, Black) using 4 screens. Allows full-color reproduction, gradients, and photo-like images via halftone dots. More complex setup but great for detailed, multi-color artwork.</p>
+        <img src="https://external-preview.redd.it/6CPr-8QMVu0b-vmveBm7pRpQxojqNu562p-M2_N8g7k.png?width=640&crop=smart&auto=webp&s=70d66f87964bf90c05d041d91467670032cd01a8" alt="CMYK screen printing color separation angles" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height=""/>
+        </div>
+    </li>
     </ul>
     <p class="selected-text">
       <strong>Selected:</strong> 
@@ -1101,7 +1121,7 @@
   <!-- Desired total + Multiple toggle -->
   <div class="bulk-quantity-controls">
     <p>I would like to print 
-      <input type="number" id="desired-quantity" min="20" placeholder="20 (minimum)" value="" />
+      <input type="number" id="desired-quantity" min="20" placeholder="20" value="" />
     </p>
 
     <div class="multiple-toggle">
@@ -1171,9 +1191,28 @@
         {%- if option.name == 'Color' or option.name == 'Colour' -%}
         {%- assign color_option_index = option.position | minus: 1 -%}
         {%- for color_value in option.values -%}
+            {%- liquid
+                assign metaobject_color = color_value.swatch.color
+                assign metaobject_image = color_value.swatch.image
+                assign has_image = false
+                assign background_color = ''
+                assign background_image = ''
+
+                if metaobject_image != blank
+                    assign swatch_image_url = metaobject_image | image_url: width: 100
+                    assign background_image = swatch_image_url
+                    assign has_image = true
+                elsif metaobject_color != blank
+                    assign background_color = metaobject_color
+                endif
+            -%}
+            
             <div class="size-table" data-color="{{ color_value | escape }}" style="display: none;">
             <div class="size-table-header">
-                <h4>{{ color_value }}</h4>
+                <h4>
+                    <span class="color-badge" style="{% if has_image %}background-image: url({{ background_image }});{% else %}background-color: {{ background_color }};{% endif %} background-size: cover; background-position: center;"></span>
+                    {{ color_value }}
+                </h4>
                 <button type="button" class="remove-color-btn" data-color="{{ color_value | escape }}" aria-label="Remove {{ color_value }}">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1204,18 +1243,18 @@
                     -%}
                     
                     <div class="size-item {% unless size_available %}soldout{% endunless %}" 
-                         data-variant-id="{{ variant_id }}" 
-                         data-variant-price="{{ variant_price }}"
-                         data-color="{{ color_value | escape }}"
-                         data-size="{{ size_value | escape }}">
+                        data-variant-id="{{ variant_id }}" 
+                        data-variant-price="{{ variant_price }}"
+                        data-color="{{ color_value | escape }}"
+                        data-size="{{ size_value | escape }}">
                         <input type="number" 
-                               class="size-quantity-input" 
-                               min="0" 
-                               value="0"
-                               placeholder="0"
-                               data-variant-id="{{ variant_id }}"
-                               data-variant-price="{{ variant_price }}"
-                               {% unless size_available %}disabled{% endunless %} />
+                            class="size-quantity-input" 
+                            min="0" 
+                            value="0"
+                            placeholder="0"
+                            data-variant-id="{{ variant_id }}"
+                            data-variant-price="{{ variant_price }}"
+                            {% unless size_available %}disabled{% endunless %} />
                         <div class="size-label">{{ size_value }}</div>
                         <div class="size-quantity">
                         {% if size_available %}
@@ -1240,12 +1279,6 @@
     <p><strong>Total Quantity:</strong> <span id="total-quantity">0</span> (Minimum 20)</p>
     <p><strong>Total Price (ex GST):</strong> <span id="total-price">$0.00</span></p>
     <p id="quantity-error" style="color: red; font-weight: bold;"></p>
-  </div>
-
-  <!-- Preview & Add to Cart -->
-  <div class="product-image-preview">
-    <img src="https://placehold.co/50x50?text=Your+Product+Preview" alt="Product preview" width="" height="" />
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. ... <a href="#">Learn More...</a></p>
   </div>
 
   <button type="button" id="add-to-cart-with-print" class="btn add-to-cart-btn">

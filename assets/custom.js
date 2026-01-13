@@ -9,6 +9,7 @@ const selectedDisplay = document.getElementById('selected-option');
 const addButton = document.getElementById('add-to-cart-with-print');
 const statusMessage = document.getElementById('status-message');
 const multipleToggle = document.getElementById('multiple-toggle');
+const desiredQuantityInput = document.getElementById('desired-quantity');
 
 // Main Printing Method selection
 document.getElementById('print-options').addEventListener('click', (e) => {
@@ -54,12 +55,12 @@ document.addEventListener('change', (e) => {
 
 updateAddButtonState();
 
-// Calculate totals
+// Calculate totals from variation boxes only
 function calculateTotals() {
   let totalQuantity = 0;
   let totalPrice = 0;
 
-  const quantityInputs = document.querySelectorAll('.size-quantity-input');
+  const quantityInputs = document.querySelectorAll('.size-quantity-input:not([disabled])');
   
   quantityInputs.forEach(input => {
     const qty = parseInt(input.value) || 0;
@@ -82,7 +83,7 @@ function calculateTotals() {
   return { totalQuantity, totalPrice };
 }
 
-// Add event listeners to all quantity inputs
+// Add event listeners to variation box inputs for manual editing
 document.addEventListener('input', (e) => {
   if (e.target.classList.contains('size-quantity-input')) {
     calculateTotals();
@@ -97,7 +98,22 @@ addButton.addEventListener('click', async () => {
     return;
   }
 
+  const desiredQty = parseInt(desiredQuantityInput.value) || 0;
   const { totalQuantity } = calculateTotals();
+
+  // Check if desired quantity is entered
+  if (desiredQty === 0 || !desiredQuantityInput.value) {
+    statusMessage.textContent = 'Please enter your desired quantity in the "I would like to print" field.';
+    statusMessage.style.color = 'red';
+    return;
+  }
+
+  // Check if quantities match
+  if (desiredQty !== totalQuantity) {
+    statusMessage.textContent = `Quantity mismatch! You want ${desiredQty} items, but selected ${totalQuantity} items. Please adjust your selections.`;
+    statusMessage.style.color = 'red';
+    return;
+  }
 
   if (totalQuantity < 20) {
     statusMessage.textContent = 'Minimum order quantity is 20. Please add more items.';
@@ -199,13 +215,25 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (!isMultipleMode) {
       // Single color mode - keep only first selected color
+      const firstChecked = document.querySelector('.swatch-input[data-option-name="Color"]:checked, .swatch-input[data-option-name="Colour"]:checked');
+      
       displayedColors.clear();
       
-      // Uncheck all swatches
-      swatchInputs.forEach(input => input.checked = false);
+      // Uncheck all swatches except first
+      swatchInputs.forEach(input => {
+        if (input !== firstChecked) {
+          input.checked = false;
+        }
+      });
       
-      // Hide all tables
-      sizeTables.forEach(table => table.style.display = 'none');
+      // Keep only first selected color
+      if (firstChecked) {
+        const colorValue = firstChecked.getAttribute('data-option-value');
+        displayedColors.add(colorValue);
+      }
+      
+      updateSizeTables();
+      calculateTotals();
     }
   });
   
