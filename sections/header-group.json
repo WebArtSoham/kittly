@@ -17,7 +17,9 @@
         "60fe30b1-fa66-4bd9-9d3f-21fc97aa738c": {
           "type": "announcement",
           "settings": {
+            "type": "html",
             "text": "<p>\n    <svg style=\"margin: 0 10px 0 100px\" xmlns=\"http://www.w3.org/2000/svg\" viewbox=\"0 0 506.53 510.69\"><g id=\"Layer_2\" data-name=\"Layer 2\"><g id=\"Layer_1-2\" data-name=\"Layer 1\"><path d=\"M500.7,27.62q-36.6,35-73.12,70.12-51.12,49.06-102.29,98.1a55.94,55.94,0,0,1-5.33,4c3.14,2.3,5.08,3.77,7.06,5.18,29.3,21,58.69,42,87.82,63.22a21,21,0,0,1,7.21,10.15c2.13,7-1.16,12.82-8.35,16.79Q383.18,312,352.54,328.66L59.88,488.36a297,297,0,0,1-35,20A23.59,23.59,0,0,1,20,510.11h0a19.7,19.7,0,0,1-4.67.58,15.23,15.23,0,0,1-9.59-3.19c-.18-.13-.34-.28-.51-.43a1.49,1.49,0,0,1-.14-.12l-.58-.55L4.19,506a16.25,16.25,0,0,1-4.08-9.31,16.08,16.08,0,0,1-.11-1.8A13.51,13.51,0,0,1,.57,491a18.36,18.36,0,0,1,5.26-7.94q33.48-32,66.89-64.15,67.46-65.28,135-130.49a49.09,49.09,0,0,1,5.42-3.89c-8.41-6.07-15.5-11.2-22.62-16.3l-79.41-57c-12.42-8.92-11.34-21.75,2.4-28.48L481.61,2.37C493.53-3.47,505,1.88,506.42,14,507.08,19.56,504.66,23.84,500.7,27.62Z\"></path></g></g></svg>\n    <a href=\"#\">\n        <span>Clearance Sale Event: Up to 50% Off Select Items!</span>\n    </a>\n</p>",
+            "text_rich": "<p>Welcome to our store</p>",
             "btn_color": "#f84248",
             "btn_border_color": "#ffffff",
             "btn_bg_color": "#ffffff",
@@ -28,6 +30,7 @@
       "block_order": [
         "60fe30b1-fa66-4bd9-9d3f-21fc97aa738c"
       ],
+      "disabled": true,
       "settings": {
         "layout": "scroll",
         "enable_close": false,
@@ -40,7 +43,11 @@
         "arrow_active": false,
         "content_max_width": 38,
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_top_tablet": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom": 0,
+        "padding_bottom_tablet": 0,
+        "padding_bottom_mobile": 0
       }
     },
     "header-classic": {
@@ -49,20 +56,20 @@
         "a2e4ea2e-73e5-4452-8129-d86dbbae584d": {
           "type": "logo",
           "settings": {
-            "logo": "shopify://shop_images/ella-logo-black-compressor.png",
-            "logo_width": 90,
+            "logo": "shopify://shop_images/kittly_31eec071-963e-4ca5-b4eb-751d286687a6.png",
+            "logo_width": 150,
             "logo_text": "",
             "logo_font_size": 30,
             "logo_font_weight": "900",
             "logo_text_transform": "uppercase",
-            "logo_color": "#232323",
+            "logo_color": "#1c648d",
             "spacing": 5
           }
         },
         "fde2cc21-cbc9-4c9a-ad68-7cc53ec68280": {
           "type": "service",
           "settings": {
-            "customer_service_text": "<p>Customer Service 091 234-ELLA</p>",
+            "customer_service_text": "",
             "text_color": "#323232",
             "show_language_currency": true,
             "language_currency_color": "#323232",
@@ -76,8 +83,9 @@
         },
         "5939cbc0-a9fd-48e0-adcd-1d945e05dc99": {
           "type": "text",
+          "disabled": true,
           "settings": {
-            "free_shipping_text": "<p>Free shipping on All Orders. No Minimum Purchase</p>",
+            "free_shipping_text": "",
             "text_color": "#232323",
             "spacing": 15
           }
@@ -88,9 +96,12 @@
             "show_cart": true,
             "cart_color": "#323232",
             "cart_color_item": "#323232",
-            "cart_bg_item": "#ffe5e8",
+            "cart_bg_item": "#e9c079",
             "show_wishlist": true,
             "wishlist_color": "#323232",
+            "show_wishlist_number": false,
+            "wishlist_color_item": "#ffffff",
+            "wishlist_bg_item": "#232323",
             "show_customer": true,
             "customer_color": "#323232",
             "spacing": 0
@@ -119,7 +130,6 @@
           "type": "logo",
           "settings": {
             "logo_position": "sticky_menu",
-            "logo": "shopify://shop_images/logo-fixed.png",
             "logo_width": 90,
             "logo_width_fixed": 55,
             "logo_text": "",
@@ -178,6 +188,7 @@
             "show_search": false,
             "show_customer": false,
             "show_wishlist": false,
+            "show_wishlist_number": false,
             "show_cart": false,
             "text_font_size": 14,
             "show_language_currency_sticky": false,
@@ -185,13 +196,16 @@
             "show_customer_sticky": false,
             "show_wishlist_sticky": false,
             "show_cart_sticky": true,
+            "cart_icon": "1",
             "header_icons_color": "#ffffff",
             "header_icons_color_hover": "#ffffff",
             "header_icons_border_color": "rgba(0,0,0,0)",
             "header_icons_border_sticky_color": "#232323",
             "cart_count_bubble_color": "#323232",
             "cart_count_bubble_bg": "#ffe5e8",
-            "cart_count_bubble_bg_gradient": ""
+            "cart_count_bubble_bg_gradient": "",
+            "wishlist_color_item": "#ffffff",
+            "wishlist_bg_item": "#232323"
           }
         },
         "d3131109-9329-42fa-bbb5-d25d01fd698b": {
@@ -202,7 +216,6 @@
             "item": "new in",
             "column": 3,
             "show_banner_1": true,
-            "banner_1": "shopify://shop_images/mega-menu-1.jpg",
             "banner_url_1": "shopify://collections/blazero",
             "show_product": true,
             "product_title": "Featured Products",
@@ -217,13 +230,10 @@
             "item": "trend",
             "column": 3,
             "show_banner_1": true,
-            "banner_1": "shopify://shop_images/mega-menu-2.jpg",
             "banner_url_1": "shopify://collections/congue",
             "show_banner_2": true,
-            "banner_2": "shopify://shop_images/mega-menu-3.jpg",
             "banner_url_2": "shopify://collections/cosmopolis",
             "show_banner_3": true,
-            "banner_3": "shopify://shop_images/mega-menu-4.jpg",
             "banner_url_3": "shopify://collections/cosmopolitan"
           }
         },
@@ -236,20 +246,17 @@
             "item": "collections",
             "column": 5,
             "show_banner_1": true,
-            "banner_1": "shopify://shop_images/mega-menu-5-min.jpg",
             "banner_url_1": "shopify://products/dempus-lortis-cosmo-sapiendo",
             "show_banner_2": true,
-            "banner_2": "shopify://shop_images/mega-menu-6-min.jpg",
             "banner_url_2": "shopify://products/dempus-lortis-cosmo-sapiendo-1",
             "show_banner_3": true,
-            "banner_3": "shopify://shop_images/mega-menu-7-min.jpg",
             "banner_url_3": "shopify://products/dempus-lortis-cosmo-sapiendo-2",
             "show_banner_4": true,
-            "banner_4": "shopify://shop_images/mega-menu-8-min.jpg",
             "banner_url_4": "shopify://products/dempus-lortis-cosmo-sapiendo-3",
             "show_banner_5": true,
-            "banner_5": "shopify://shop_images/mega-menu-9-min.jpg",
-            "banner_url_5": "shopify://products/dempus-an-lortis-tempus-sapiendos"
+            "banner_url_5": "shopify://products/dempus-an-lortis-tempus-sapiendos",
+            "show_banner_6": false,
+            "banner_url_6": ""
           }
         },
         "23b6fa6d-4f30-4a97-8dc1-2c516f8a7f0e": {
@@ -260,7 +267,6 @@
             "item": "demo",
             "column": 5,
             "show_banner_1": false,
-            "banner_1": "shopify://shop_images/mega-menu-10-min.jpg",
             "banner_url_1": "shopify://products/dempus-lortis-cosmo-sapiendo-4",
             "show_product": false,
             "product_title": "On Sale Products",
@@ -325,13 +331,14 @@
       "settings": {
         "container": "1170",
         "padding_full_width": 0,
-        "header_navigation_bg": "#000000",
+        "header_navigation_bg": "#1c648d",
         "header_navigation_bg_gradient": "",
         "sticky_header_type": "on_scroll",
         "sticky_header_width": "full",
         "enable_transparent": false,
         "transparent_color": "#ffffff",
-        "transparent_color_hover": "#ffffff"
+        "transparent_color_hover": "#ffffff",
+        "border_color": "rgba(0,0,0,0)"
       }
     },
     "header-mobile": {
@@ -340,25 +347,28 @@
         "7de2266e-0cd4-4fda-9f09-06f75a17f944": {
           "type": "menu",
           "settings": {
-            "color": "#232323"
+            "color": "#232323",
+            "menu_tab_bg": "#000000"
           }
         },
         "163e2cb5-14f2-4af6-9ac3-77193c082f53": {
           "type": "search",
           "settings": {
+            "icon": "1",
+            "popup_action": false,
             "color": "#232323"
           }
         },
         "550fbd21-75fb-4051-9dee-77d91b5239f0": {
           "type": "logo",
           "settings": {
-            "logo_mobile": "shopify://shop_images/ella-logo-black-home-5.png",
             "logo_width_mobile": 65,
             "logo_text": "",
             "logo_font_size": 20,
             "logo_font_weight": "900",
             "logo_text_transform": "uppercase",
-            "logo_color": "#232323"
+            "logo_color": "#232323",
+            "alignment": "center"
           }
         },
         "20dae707-64c0-4ea3-a05e-561cae9836d8": {
@@ -372,6 +382,7 @@
           "type": "cart",
           "settings": {
             "icon": "2",
+            "show_cart_count_bubble": true,
             "color": "#232323",
             "color_bubble": "#ffffff",
             "bg_bubble": "#232323"
@@ -389,6 +400,9 @@
         "background": "#ffffff",
         "gradient": "",
         "sticky_header_type": "on_scroll",
+        "enable_transparent": false,
+        "transparent_color": "#ffffff",
+        "transparent_border_color": "",
         "padding_top": 0,
         "padding_bottom": 0
       }

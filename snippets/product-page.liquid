@@ -1006,12 +1006,8 @@
                                                 %}
                                             </div>
                                         {% endunless %}
-
-
-                                        
-{% comment %} Inject reliable product JSON for JS {% endcomment %}
-<script type="application/json" id="custom-product-json">
-  {{ product | json }}
+<script type="application/json" id="ProductJson-{{ section.id }}">
+  {{ product.variants | json }}
 </script>
 
 <div class="custom-print-section">
@@ -1021,14 +1017,36 @@
   <div class="option-group">
     <label><strong>Choose Decoration On Front <span style="color: red;">*</span></strong></label>
     <ul id="print-options" class="print-options-list">
-      <li data-value="Embroidery">Embroidery</li>
-      <li data-value="Full Colour Transfer Small">Full Colour Transfer Small</li>
-      <li data-value="Full Colour Transfer Medium">Full Colour Transfer Medium</li>
-      <li data-value="Full Colour Transfer Large">Full Colour Transfer Large</li>
-      <li data-value="1 Colour Screen Print">1 Colour Screen Print</li>
-      <li data-value="2 Colour Screen Print">2 Colour Screen Print</li>
-      <li data-value="3 Colour Screen Print">3 Colour Screen Print</li>
-      <li data-value="4 Colour Screen Print">4 Colour Screen Print</li>
+    <li data-value="Embroidery">Embroidery</li>
+    <li data-value="Full Colour Transfer Small">Full Colour Transfer Small</li>
+    <li data-value="Full Colour Transfer Medium">Full Colour Transfer Medium</li>
+    <li data-value="Full Colour Transfer Large">Full Colour Transfer Large</li>
+    <li data-value="1 Colour Screen Print">1 Colour Screen Print</li>
+    <li data-value="2 Colour Screen Print">2 Colour Screen Print</li>
+    
+    <!-- 3 Colour with tooltip -->
+    <li class="has-tooltip" data-value="3 Colour Screen Print">
+        3 Colour Screen Print
+        <span class="tooltip-trigger">?</span>
+        <div class="custom-tooltip bottom">
+            <div>
+        <p><strong>3 Colour Screen Print</strong></p>
+        <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p> </div>
+        <img src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp" alt="Example of multi-color screen separation" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height=""/>
+        </div>
+    </li>
+    
+    <!-- 4 Colour with tooltip -->
+    <li class="has-tooltip" data-value="4 Colour Screen Print">
+        4 Colour Screen Print
+        <span class="tooltip-trigger">?</span>
+        <div class="custom-tooltip bottom">
+            <div>
+        <p><strong>4 Colour Screen Print</strong></p>
+        <p>Typically refers to CMYK process printing (Cyan, Magenta, Yellow, Black) using 4 screens. Allows full-color reproduction, gradients, and photo-like images via halftone dots. More complex setup but great for detailed, multi-color artwork.</p> </div>
+        <img src="https://external-preview.redd.it/6CPr-8QMVu0b-vmveBm7pRpQxojqNu562p-M2_N8g7k.png?width=640&crop=smart&auto=webp&s=70d66f87964bf90c05d041d91467670032cd01a8" alt="CMYK screen printing color separation angles" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height=""/>
+        </div>
+    </li>
     </ul>
     <p class="selected-text">
       <strong>Selected:</strong> 
@@ -1060,7 +1078,6 @@
   <div class="option-group">
     <label><strong>Choose Decoration On Right Hand Sleeve</strong></label>
     <select id="decoration-right" class="decoration-select">
-      <!-- Same options as back -->
       <option value="">Select an option...</option>
       <option value="NONE">NONE</option>
       <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
@@ -1081,7 +1098,6 @@
   <div class="option-group">
     <label><strong>Choose Decoration On Left Hand Sleeve</strong></label>
     <select id="decoration-left" class="decoration-select">
-      <!-- Same options -->
       <option value="">Select an option...</option>
       <option value="NONE">NONE</option>
       <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
@@ -1099,15 +1115,15 @@
   </div>
 
   <!-- Bulk Quantity Header -->
-  <div class="bulk-quantity-header">
-    <h3>Choose Product Quantity & Colour</h3>
+  <div class="option-group">
+    <strong><label>Choose Product Quantity & Colour</strong></label>
     <a href="#" class="size_btn">Size Guide</a>
   </div>
 
   <!-- Desired total + Multiple toggle -->
   <div class="bulk-quantity-controls">
     <p>I would like to print 
-      <input type="number" id="desired-quantity" min="20" placeholder="20 (minimum)" value="" />
+      <input type="number" id="desired-quantity" min="20" placeholder="20" value="" />
     </p>
 
     <div class="multiple-toggle">
@@ -1119,25 +1135,159 @@
     </div>
   </div>
 
-  <!-- Quantity Matrix Container -->
-  <div id="quantity-matrix"></div>
+    {%- for option in product.options_with_values -%}
+    <fieldset class="js product-form__input product-form__input--swatch {{ option.name | downcase }}-swatch">
+        <legend class="form__label">{{ option.name }}:</legend>
+        
+        {%- for value in option.values -%}
+        {%- liquid
+            assign metaobject_color = value.swatch.color
+            assign metaobject_image = value.swatch.image
+            assign has_image = false
+            assign background_color = ''
+            assign background_image = ''
 
+            if metaobject_image != blank
+            assign swatch_image_url = metaobject_image | image_url: width: 100
+            assign background_image = swatch_image_url
+            assign has_image = true
+            elsif metaobject_color != blank
+            assign background_color = metaobject_color
+            endif
+            
+            assign option_available = false
+            assign option_index = option.position | minus: 1
+            for variant in product.variants
+            if variant.options[option_index] == value and variant.available
+                assign option_available = true
+                break
+            endif
+            endfor
+        -%}
+
+        <input type="checkbox"
+            id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+            name="{{ option.name }}"
+            value="{{ value | escape }}"
+            form="{{ product_form_id | default: 'product-form' }}"
+            class="swatch-input"
+            data-option-value="{{ value | escape }}"
+            data-option-name="{{ option.name | escape }}"
+            {% unless option_available %}disabled{% endunless %}
+        />
+        
+        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+            class="swatch-label {% unless option_available %}soldout{% endunless %}"
+            title="{{ value | escape }}"
+            style="{% if has_image %}background-image: url({{ background_image }});{% else %}background-color: {{ background_color }};{% endif %} background-size: cover; background-position: center;"
+        >
+            <span class="visually-hidden">{{ value }}</span>
+        </label>
+        {%- endfor -%}
+    </fieldset>
+    {%- endfor -%}
+
+    {%- comment -%} Size Availability Tables Container {%- endcomment -%}
+    <div class="size-availability-container" style="margin-top: 20px;">
+    {%- for option in product.options_with_values -%}
+        {%- if option.name == 'Color' or option.name == 'Colour' -%}
+        {%- assign color_option_index = option.position | minus: 1 -%}
+        {%- for color_value in option.values -%}
+            {%- liquid
+                assign metaobject_color = color_value.swatch.color
+                assign metaobject_image = color_value.swatch.image
+                assign has_image = false
+                assign background_color = ''
+                assign background_image = ''
+
+                if metaobject_image != blank
+                    assign swatch_image_url = metaobject_image | image_url: width: 100
+                    assign background_image = swatch_image_url
+                    assign has_image = true
+                elsif metaobject_color != blank
+                    assign background_color = metaobject_color
+                endif
+            -%}
+            
+            <div class="size-table" data-color="{{ color_value | escape }}" style="display: none;">
+            <div class="size-table-header">
+                <h4>
+                    <span class="color-badge" style="{% if has_image %}background-image: url({{ background_image }});{% else %}background-color: {{ background_color }};{% endif %} background-size: cover; background-position: center;"></span>
+                    {{ color_value }}
+                </h4>
+                <button type="button" class="remove-color-btn" data-color="{{ color_value | escape }}" aria-label="Remove {{ color_value }}">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                </button>
+            </div>
+            <div class="size-options">
+                {%- for size_option in product.options_with_values -%}
+                {%- if size_option.name == 'Size' -%}
+                    {%- assign size_option_index = size_option.position | minus: 1 -%}
+                    {%- for size_value in size_option.values -%}
+                    {%- liquid
+                        assign size_available = false
+                        assign size_quantity = 0
+                        assign variant_id = ''
+                        assign variant_price = 0
+                        for variant in product.variants
+                        if variant.options[color_option_index] == color_value and variant.options[size_option_index] == size_value
+                            if variant.available
+                            assign size_available = true
+                            assign size_quantity = variant.inventory_quantity
+                            assign variant_id = variant.id
+                            assign variant_price = variant.price
+                            endif
+                            break
+                        endif
+                        endfor
+                    -%}
+                    
+                    <div class="size-item {% unless size_available %}soldout{% endunless %}" 
+                        data-variant-id="{{ variant_id }}" 
+                        data-variant-price="{{ variant_price }}"
+                        data-color="{{ color_value | escape }}"
+                        data-size="{{ size_value | escape }}">
+                        <input type="number" 
+                            class="size-quantity-input" 
+                            min="0" 
+                            value="0"
+                            placeholder="0"
+                            data-variant-id="{{ variant_id }}"
+                            data-variant-price="{{ variant_price }}"
+                            {% unless size_available %}disabled{% endunless %} />
+                        <div class="size-label">{{ size_value }}</div>
+                        <div class="size-quantity">
+                        {% if size_available %}
+                            {{ size_quantity }}+ in stock
+                        {% else %}
+                            Out of stock
+                        {% endif %}
+                        </div>
+                    </div>
+                    {%- endfor -%}
+                {%- endif -%}
+                {%- endfor -%}
+            </div>
+            </div>
+        {%- endfor -%}
+        {%- endif -%}
+    {%- endfor -%}
+    </div>
+<div class="buy_now_btn">
   <!-- Totals & Errors -->
   <div class="bulk-totals">
-    <p><strong>Total Quantity:</strong> <span id="total-quantity">0</span> (Minimum 20)</p>
+    
     <p><strong>Total Price (ex GST):</strong> <span id="total-price">$0.00</span></p>
+    <p class="qty">Total Quantity: <span id="total-quantity">0</span> (Minimum 20)</p>
     <p id="quantity-error" style="color: red; font-weight: bold;"></p>
   </div>
 
-  <!-- Preview & Add to Cart -->
-  <div class="product-image-preview">
-    <img src="https://placehold.co//50x50?text=Your+Product+Preview" alt="Product preview" width="" height="" />
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. ... <a href="#">Learn More...</a></p>
-  </div>
-
-  <button type="button" id="add-to-cart-with-print" class="btn add-to-cart-btn" disabled>
-    Add to Cart with Custom Printing
+  <button type="button" id="add-to-cart-with-print" class="btn add-to-cart-btn">
+    Add to Cart
   </button>
+</div>
 
   <p id="status-message" style="margin-top: 15px; font-weight: bold;"></p>
 </div>
