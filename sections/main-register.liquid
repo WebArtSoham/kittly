@@ -25,6 +25,7 @@
           <div class="login-text">
             {{ 'customer.register.text' | t }}
           </div>
+{% comment %}
           {%- form 'create_customer'
             , class: 'create-customer-form' -%}
             {%- if form.errors -%}
@@ -193,6 +194,8 @@
               {% endif %}
             </div>
           {%- endform -%}
+{% endcomment %}
+          <div class="samitaWS-registrationForm" data-id="MTA4MzY="></div>
         </div>
       </div>
     </div>

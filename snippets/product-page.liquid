@@ -1029,8 +1029,9 @@
         3 Colour Screen Print
         <span class="tooltip-trigger">?</span>
         <div class="custom-tooltip bottom">
+            <div>
         <p><strong>3 Colour Screen Print</strong></p>
-        <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p>
+        <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p> </div>
         <img src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp" alt="Example of multi-color screen separation" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height=""/>
         </div>
     </li>
@@ -1040,8 +1041,9 @@
         4 Colour Screen Print
         <span class="tooltip-trigger">?</span>
         <div class="custom-tooltip bottom">
+            <div>
         <p><strong>4 Colour Screen Print</strong></p>
-        <p>Typically refers to CMYK process printing (Cyan, Magenta, Yellow, Black) using 4 screens. Allows full-color reproduction, gradients, and photo-like images via halftone dots. More complex setup but great for detailed, multi-color artwork.</p>
+        <p>Typically refers to CMYK process printing (Cyan, Magenta, Yellow, Black) using 4 screens. Allows full-color reproduction, gradients, and photo-like images via halftone dots. More complex setup but great for detailed, multi-color artwork.</p> </div>
         <img src="https://external-preview.redd.it/6CPr-8QMVu0b-vmveBm7pRpQxojqNu562p-M2_N8g7k.png?width=640&crop=smart&auto=webp&s=70d66f87964bf90c05d041d91467670032cd01a8" alt="CMYK screen printing color separation angles" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height=""/>
         </div>
     </li>
@@ -1273,17 +1275,19 @@
         {%- endif -%}
     {%- endfor -%}
     </div>
-
+<div class="buy_now_btn">
   <!-- Totals & Errors -->
   <div class="bulk-totals">
-    <p><strong>Total Quantity:</strong> <span id="total-quantity">0</span> (Minimum 20)</p>
+    
     <p><strong>Total Price (ex GST):</strong> <span id="total-price">$0.00</span></p>
+    <p class="qty">Total Quantity: <span id="total-quantity">0</span> (Minimum 20)</p>
     <p id="quantity-error" style="color: red; font-weight: bold;"></p>
   </div>
 
   <button type="button" id="add-to-cart-with-print" class="btn add-to-cart-btn">
-    Submit
+    Add to Cart
   </button>
+</div>
 
   <p id="status-message" style="margin-top: 15px; font-weight: bold;"></p>
 </div>
