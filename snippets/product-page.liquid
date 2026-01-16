@@ -1013,127 +1013,196 @@
 <div class="custom-print-section">
 {% comment %}<h3>Select Printing & Decoration Options</h3>{% endcomment %}
 
+{%- liquid
+    assign embroidery_image = block.settings.embroidery_image
+    assign embroidery_text = block.settings.embroidery_text
+
+    assign fcts_image = block.settings.fcts_image
+    assign fcts_text = block.settings.fcts_text
+
+    assign fctm_image = block.settings.fctm_image
+    assign fctm_text = block.settings.fctm_text
+
+    assign fctl_image = block.settings.fctl_image
+    assign fctl_text = block.settings.fctl_text
+
+    assign one_csp_image = block.settings.one_csp_image
+    assign one_csp_text = block.settings.one_csp_text
+
+    assign two_csp_image = block.settings.two_csp_image
+    assign two_csp_text = block.settings.two_csp_text
+
+    assign three_csp_image = block.settings.three_csp_image
+    assign three_csp_text = block.settings.three_csp_text
+
+    assign four_csp_image = block.settings.four_csp_image
+    assign four_csp_text = block.settings.four_csp_text
+-%}
+
     <!-- Front Decoration (required) -->
     <div class="option-group">
         <label><strong>Choose Decoration On Front <span style="color: red;">*</span></strong></label>
         <ul id="print-options" class="print-options-list">
-        <li class="has-tooltip" data-value="Embroidery">Embroidery
-            <span class="tooltip-trigger">?</span>
-            <div class="custom-tooltip bottom">
-            <div>
-                <p><strong>Embroidery</strong></p>
-                <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each
-                color prints solidly with no halftone dots needed for simple gradients.<a href="#">Learn More...</a></p>
-            </div>
-            <img
-                src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp"
-                alt="Example of multi-color screen separation"
-                style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height="" />
-            </div>
-        </li>
-        <li class="has-tooltip" data-value="Full Colour Transfer Small">Full Colour Transfer Small
-            <span class="tooltip-trigger">?</span>
-            <div class="custom-tooltip bottom">
-            <div>
-                <p><strong>Full Colour Transfer Small</strong></p>
-                <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each
-                color prints solidly with no halftone dots needed for simple gradients.</p>
-            </div>
-            <img
-                src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp"
-                alt="Example of multi-color screen separation"
-                style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height="" />
-            </div>
-        </li>
-        <li class="has-tooltip" data-value="Full Colour Transfer Medium">Full Colour Transfer Medium
-            <span class="tooltip-trigger">?</span>
-            <div class="custom-tooltip bottom">
-            <div>
-                <p><strong>Full Colour Transfer Medium</strong></p>
-                <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each
-                color prints solidly with no halftone dots needed for simple gradients.</p>
-            </div>
-            <img
-                src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp"
-                alt="Example of multi-color screen separation"
-                style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height="" />
-            </div>
-        </li>
-        <li class="has-tooltip" data-value="Full Colour Transfer Large">Full Colour Transfer Large
-            <span class="tooltip-trigger">?</span>
-            <div class="custom-tooltip bottom">
-            <div>
-                <p><strong>Full Colour Transfer Large</strong></p>
-                <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each
-                color prints solidly with no halftone dots needed for simple gradients.</p>
-            </div>
-            <img
-                src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp"
-                alt="Example of multi-color screen separation"
-                style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height="" />
-            </div>
-        </li>
-        <li class="has-tooltip" data-value="1 Colour Screen Print">1 Colour Screen Print
-            <span class="tooltip-trigger">?</span>
-            <div class="custom-tooltip bottom">
-            <div>
-                <p><strong>1 Colour Screen Print</strong></p>
-                <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each
-                color prints solidly with no halftone dots needed for simple gradients.</p>
-            </div>
-            <img
-                src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp"
-                alt="Example of multi-color screen separation"
-                style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height="" />
-            </div>
-        </li>
-        <li class="has-tooltip" data-value="2 Colour Screen Print">2 Colour Screen Print
-            <span class="tooltip-trigger">?</span>
-            <div class="custom-tooltip bottom">
-            <div>
-                <p><strong>2 Colour Screen Print</strong></p>
-                <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each
-                color prints solidly with no halftone dots needed for simple gradients.</p>
-            </div>
-            <img
-                src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp"
-                alt="Example of multi-color screen separation"
-                style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height="" />
-            </div>
-        </li>
-
-        <li class="has-tooltip" data-value="3 Colour Screen Print">
-            3 Colour Screen Print
-            <span class="tooltip-trigger">?</span>
-            <div class="custom-tooltip bottom">
-            <div>
-                <p><strong>3 Colour Screen Print</strong></p>
-                <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each
-                color prints solidly with no halftone dots needed for simple gradients.</p>
-            </div>
-            <img
-                src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp"
-                alt="Example of multi-color screen separation"
-                style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height="" />
-            </div>
-        </li>
-
-        <li class="has-tooltip" data-value="4 Colour Screen Print">
-            4 Colour Screen Print
-            <span class="tooltip-trigger">?</span>
-            <div class="custom-tooltip bottom">
-            <div>
-                <p><strong>4 Colour Screen Print</strong></p>
-                <p>Typically refers to CMYK process printing (Cyan, Magenta, Yellow, Black) using 4 screens. Allows full-color
-                reproduction, gradients, and photo-like images via halftone dots. More complex setup but great for detailed,
-                multi-color artwork.</p>
-            </div>
-            <img
-                src="https://external-preview.redd.it/6CPr-8QMVu0b-vmveBm7pRpQxojqNu562p-M2_N8g7k.png?width=640&crop=smart&auto=webp&s=70d66f87964bf90c05d041d91467670032cd01a8"
-                alt="CMYK screen printing color separation angles"
-                style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height="" />
-            </div>
-        </li>
+            <li class="has-tooltip" data-value="Embroidery">Embroidery
+                {%- if embroidery_text != blank or embroidery_image != blank -%}
+                <span class="tooltip-trigger">?</span>
+                <div class="custom-tooltip bottom">
+                    <div>
+                    <p><strong>Embroidery</strong></p>
+                    {{ embroidery_text }}
+                    </div>
+                    {%- if embroidery_image != blank -%}
+                    <img
+                        src="{{ embroidery_image | image_url: width: 800 }}"
+                        alt="Example of embroidery"
+                        width="800"
+                        height="{{ embroidery_image.aspect_ratio | times: 800 | round }}"
+                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
+                        loading="lazy"/>
+                    {%- endif -%}
+                </div>
+                {%- endif -%}
+            </li>
+            <li class="has-tooltip" data-value="Full Colour Transfer Small">Full Colour Transfer Small
+                {%- if fcts_text != blank or fcts_image != blank -%}
+                <span class="tooltip-trigger">?</span>
+                <div class="custom-tooltip bottom">
+                    <div>
+                    <p><strong>Full Colour Transfer Small</strong></p>
+                    {{ fcts_text }}
+                    </div>
+                    {%- if fcts_image != blank -%}
+                    <img
+                        src="{{ fcts_image | image_url: width: 800 }}"
+                        alt="Example of full colour transfer small"
+                        width="800"
+                        height="{{ fcts_image.aspect_ratio | times: 800 | round }}"
+                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
+                        loading="lazy"/>
+                    {%- endif -%}
+                </div>
+                {%- endif -%}
+            </li>
+            <li class="has-tooltip" data-value="Full Colour Transfer Medium">Full Colour Transfer Medium
+                {%- if fctm_text != blank or fctm_image != blank -%}
+                <span class="tooltip-trigger">?</span>
+                <div class="custom-tooltip bottom">
+                    <div>
+                    <p><strong>Full Colour Transfer Medium</strong></p>
+                    {{ fctm_text }}
+                    </div>
+                    {%- if fctm_image != blank -%}
+                    <img
+                        src="{{ fctm_image | image_url: width: 800 }}"
+                        alt="Example of full colour transfer medium"
+                        width="800"
+                        height="{{ fctm_image.aspect_ratio | times: 800 | round }}"
+                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
+                        loading="lazy"/>
+                    {%- endif -%}
+                </div>
+                {%- endif -%}
+            </li>
+            <li class="has-tooltip" data-value="Full Colour Transfer Large">Full Colour Transfer Large
+                {%- if fctl_text != blank or fctl_image != blank -%}
+                <span class="tooltip-trigger">?</span>
+                <div class="custom-tooltip bottom">
+                    <div>
+                    <p><strong>Full Colour Transfer Large</strong></p>
+                    {{ fctl_text }}
+                    </div>
+                    {%- if fctl_image != blank -%}
+                    <img
+                        src="{{ fctl_image | image_url: width: 800 }}"
+                        alt="Example of full colour transfer large"
+                        width="800"
+                        height="{{ fctl_image.aspect_ratio | times: 800 | round }}"
+                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
+                        loading="lazy"/>
+                    {%- endif -%}
+                </div>
+                {%- endif -%}
+            </li>
+            <li class="has-tooltip" data-value="1 Colour Screen Print">1 Colour Screen Print
+                {%- if one_csp_text != blank or one_csp_image != blank -%}
+                <span class="tooltip-trigger">?</span>
+                <div class="custom-tooltip bottom">
+                    <div>
+                    <p><strong>1 Colour Screen Print</strong></p>
+                    {{ one_csp_text }}
+                    </div>
+                    {%- if one_csp_image != blank -%}
+                    <img
+                        src="{{ one_csp_image | image_url: width: 800 }}"
+                        alt="Example of 1 colour screen print"
+                        width="800"
+                        height="{{ one_csp_image.aspect_ratio | times: 800 | round }}"
+                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
+                        loading="lazy"/>
+                    {%- endif -%}
+                </div>
+                {%- endif -%}
+            </li>
+            <li class="has-tooltip" data-value="2 Colour Screen Print">2 Colour Screen Print
+                {%- if two_csp_text != blank or two_csp_image != blank -%}
+                <span class="tooltip-trigger">?</span>
+                <div class="custom-tooltip bottom">
+                    <div>
+                    <p><strong>2 Colour Screen Print</strong></p>
+                    {{ two_csp_text }}
+                    </div>
+                    {%- if two_csp_image != blank -%}
+                    <img
+                        src="{{ two_csp_image | image_url: width: 800 }}"
+                        alt="Example of 2 colour screen print"
+                        width="800"
+                        height="{{ two_csp_image.aspect_ratio | times: 800 | round }}"
+                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
+                        loading="lazy"/>
+                    {%- endif -%}
+                </div>
+                {%- endif -%}
+            </li>
+            <li class="has-tooltip" data-value="3 Colour Screen Print">3 Colour Screen Print
+                {%- if three_csp_text != blank or three_csp_image != blank -%}                
+                <span class="tooltip-trigger">?</span>
+                <div class="custom-tooltip bottom">
+                    <div>
+                    <p><strong>3 Colour Screen Print</strong></p>
+                    {{ three_csp_text }}
+                    </div>
+                    {%- if three_csp_image != blank -%}
+                    <img
+                        src="{{ three_csp_image | image_url: width: 800 }}"
+                        alt="Example of 3 colour screen print"
+                        width="800"
+                        height="{{ three_csp_image.aspect_ratio | times: 800 | round }}"
+                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
+                        loading="lazy"/>
+                    {%- endif -%}
+                </div>
+                {%- endif -%}
+            </li>
+            <li class="has-tooltip" data-value="4 Colour Screen Print">4 Colour Screen Print
+                {%- if four_csp_text != blank or four_csp_image != blank -%}
+                <span class="tooltip-trigger">?</span>
+                <div class="custom-tooltip bottom">
+                    <div>
+                    <p><strong>4 Colour Screen Print</strong></p>
+                    {{ four_csp_text }}
+                    </div>
+                    {%- if four_csp_image != blank -%}
+                    <img
+                        src="{{ four_csp_image | image_url: width: 800 }}"
+                        alt="Example of 4 colour (CMYK) screen print"
+                        width="800"
+                        height="{{ four_csp_image.aspect_ratio | times: 800 | round }}"
+                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
+                        loading="lazy" />
+                    {%- endif -%}
+                </div>
+                {%- endif -%}
+            </li>
         </ul>
         <p class="selected-text">
             <strong>Selected:</strong> 

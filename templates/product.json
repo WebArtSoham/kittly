@@ -84,7 +84,16 @@
             "enable_border_bottom": false,
             "color_border": "#e6e6e6",
             "spacing_top": 0,
-            "spacing_bottom": 15
+            "spacing_bottom": 15,
+            "embroidery_image": "shopify://shop_images/green.png",
+            "embroidery_text": "<p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients <a href=\"#\" title=\"#\">Learn More...</a></p>",
+            "fcts_text": "<p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p>",
+            "fctm_text": "<p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p>",
+            "fctl_text": "<p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p>",
+            "one_csp_text": "<p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p>",
+            "two_csp_text": "<p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p>",
+            "three_csp_text": "<p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p>",
+            "four_csp_text": "<p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p>"
           }
         },
         "bd066b80-c8e3-4f3e-8280-b27fbf6e9423": {
