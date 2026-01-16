@@ -9,7 +9,77 @@ const selectedDisplay = document.getElementById('selected-option');
 const addButton = document.getElementById('add-to-cart-with-print');
 const statusMessage = document.getElementById('status-message');
 const multipleToggle = document.getElementById('multiple-toggle');
-const desiredQuantityInput = document.getElementById('desired-quantity');
+
+// Artwork upload elements
+const artworkInput = document.getElementById('artwork-upload');
+const fileNameDisplay = document.getElementById('file-name');
+const previewContainer = document.getElementById('artwork-preview-container');
+const previewImage = document.getElementById('artwork-preview');
+const removeArtworkBtn = document.getElementById('remove-artwork');
+const artworkFileInfo = document.getElementById('artwork-file-info');
+
+let uploadedArtworkFile = null;
+let artworkBase64 = null;
+
+// Handle artwork file upload
+artworkInput.addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  
+  if (!file) return;
+  
+  // Validate file size (10MB max)
+  const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+  if (file.size > maxSize) {
+    alert('File size exceeds 10MB. Please choose a smaller file.');
+    artworkInput.value = '';
+    return;
+  }
+  
+  // Validate file type
+  const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf', 'application/postscript', 'application/illustrator'];
+  if (!validTypes.includes(file.type) && !file.name.match(/\.(ai|eps)$/i)) {
+    alert('Invalid file type. Please upload JPG, PNG, PDF, AI, or EPS files.');
+    artworkInput.value = '';
+    return;
+  }
+  
+  uploadedArtworkFile = file;
+  fileNameDisplay.textContent = file.name;
+  
+  // Show file info
+  const fileSizeKB = (file.size / 1024).toFixed(2);
+  artworkFileInfo.textContent = `${file.name} (${fileSizeKB} KB)`;
+  
+  // Convert to base64 for storage
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    artworkBase64 = event.target.result;
+    
+    // Show preview only for images
+    if (file.type.startsWith('image/')) {
+      previewImage.src = event.target.result;
+      previewImage.style.display = 'block';
+    } else {
+      previewImage.style.display = 'none';
+    }
+    
+    previewContainer.style.display = 'block';
+    removeArtworkBtn.style.display = 'flex'; // Show remove button when image is uploaded
+  };
+  
+  reader.readAsDataURL(file);
+});
+
+// Remove artwork
+removeArtworkBtn.addEventListener('click', function() {
+  artworkInput.value = '';
+  uploadedArtworkFile = null;
+  artworkBase64 = null;
+  fileNameDisplay.textContent = 'No file chosen';
+  previewContainer.style.display = 'none';
+  previewImage.src = '';
+  removeArtworkBtn.style.display = 'none'; // Hide remove button
+});
 
 // Main Printing Method selection
 document.getElementById('print-options').addEventListener('click', (e) => {
@@ -44,7 +114,7 @@ function getCurrentVariantId() {
 
 function updateAddButtonState() {
   const variantId = getCurrentVariantId();
-  addButton.disabled = false; // Enable for bulk orders
+  addButton.disabled = false;
 }
 
 document.addEventListener('change', (e) => {
@@ -67,7 +137,7 @@ function calculateTotals() {
     const price = parseFloat(input.getAttribute('data-variant-price')) || 0;
     
     totalQuantity += qty;
-    totalPrice += (qty * price) / 100; // Shopify prices are in cents
+    totalPrice += (qty * price) / 100;
   });
 
   document.getElementById('total-quantity').textContent = totalQuantity;
@@ -83,14 +153,14 @@ function calculateTotals() {
   return { totalQuantity, totalPrice };
 }
 
-// Add event listeners to variation box inputs for manual editing
+// Add event listeners to variation box inputs
 document.addEventListener('input', (e) => {
   if (e.target.classList.contains('size-quantity-input')) {
     calculateTotals();
   }
 });
 
-// Add to cart with bulk orders
+// Add to cart with bulk orders and artwork
 addButton.addEventListener('click', async () => {
   if (!selectedPrintingMethod) {
     statusMessage.textContent = 'Please select a printing method.';
@@ -98,22 +168,7 @@ addButton.addEventListener('click', async () => {
     return;
   }
 
-  const desiredQty = parseInt(desiredQuantityInput.value) || 0;
   const { totalQuantity } = calculateTotals();
-
-  // Check if desired quantity is entered
-  if (desiredQty === 0 || !desiredQuantityInput.value) {
-    statusMessage.textContent = 'Please enter your desired quantity in the "I would like to print" field.';
-    statusMessage.style.color = 'red';
-    return;
-  }
-
-  // Check if quantities match
-  if (desiredQty !== totalQuantity) {
-    statusMessage.textContent = `Quantity mismatch! You want ${desiredQty} items, but selected ${totalQuantity} items. Please adjust your selections.`;
-    statusMessage.style.color = 'red';
-    return;
-  }
 
   if (totalQuantity < 20) {
     statusMessage.textContent = 'Minimum order quantity is 20. Please add more items.';
@@ -133,6 +188,12 @@ addButton.addEventListener('click', async () => {
   if (back && back !== '') properties['Decoration On Back'] = back;
   if (right && right !== '') properties['Decoration On Right Hand Sleeve'] = right;
   if (left && left !== '') properties['Decoration On Left Hand Sleeve'] = left;
+  
+  // Add artwork information if uploaded
+  if (uploadedArtworkFile) {
+    properties['Artwork File Name'] = uploadedArtworkFile.name;
+    properties['Artwork File Size'] = `${(uploadedArtworkFile.size / 1024).toFixed(2)} KB`;
+  }
 
   // Collect all variants with quantities
   const items = [];
@@ -209,24 +270,27 @@ document.addEventListener('DOMContentLoaded', function() {
   let displayedColors = new Set();
   let isMultipleMode = false;
 
-  // Multiple toggle handler
+  // Initialize with first color selected
+  const firstColorInput = document.querySelector('.swatch-input[data-option-name="Color"]:checked, .swatch-input[data-option-name="Colour"]:checked');
+  if (firstColorInput) {
+    const firstColor = firstColorInput.getAttribute('data-option-value');
+    displayedColors.add(firstColor);
+  }
+
   multipleToggle.addEventListener('change', function() {
     isMultipleMode = this.checked;
     
     if (!isMultipleMode) {
-      // Single color mode - keep only first selected color
       const firstChecked = document.querySelector('.swatch-input[data-option-name="Color"]:checked, .swatch-input[data-option-name="Colour"]:checked');
       
       displayedColors.clear();
       
-      // Uncheck all swatches except first
       swatchInputs.forEach(input => {
         if (input !== firstChecked) {
           input.checked = false;
         }
       });
       
-      // Keep only first selected color
       if (firstChecked) {
         const colorValue = firstChecked.getAttribute('data-option-value');
         displayedColors.add(colorValue);
@@ -248,14 +312,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Color swatch click handler
   swatchInputs.forEach(input => {
     input.addEventListener('change', function() {
       const colorValue = this.getAttribute('data-option-value');
       
       if (this.checked) {
         if (!isMultipleMode) {
-          // Single mode: clear all other colors
           displayedColors.clear();
           swatchInputs.forEach(otherInput => {
             if (otherInput !== this) {
@@ -273,7 +335,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Remove button handler
   removeButtons.forEach(button => {
     button.addEventListener('click', function() {
       const colorValue = this.getAttribute('data-color');

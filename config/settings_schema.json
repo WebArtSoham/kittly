@@ -1703,6 +1703,13 @@
         "label": "t:settings_schema.product_card.settings.product_quick_view.enable_box_shadow",
         "default": false
       },
+      // {
+      //   "type": "text",
+      //   "id": "test",
+      //   "label": "This is a test box",
+      //   "placeholder": "I love Shopify",
+      //   "default": "Welcome to webart"
+      // },      
       {
         "type": "header",
         "content": "t:settings_schema.typography.settings.type_blog_item_font.title"
