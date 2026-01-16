@@ -1013,127 +1013,144 @@
 <div class="custom-print-section">
   <h3>Select Printing & Decoration Options</h3>
 
-  <!-- Front Decoration (required) -->
-  <div class="option-group">
-    <label><strong>Choose Decoration On Front <span style="color: red;">*</span></strong></label>
-    <ul id="print-options" class="print-options-list">
-    <li data-value="Embroidery">Embroidery</li>
-    <li data-value="Full Colour Transfer Small">Full Colour Transfer Small</li>
-    <li data-value="Full Colour Transfer Medium">Full Colour Transfer Medium</li>
-    <li data-value="Full Colour Transfer Large">Full Colour Transfer Large</li>
-    <li data-value="1 Colour Screen Print">1 Colour Screen Print</li>
-    <li data-value="2 Colour Screen Print">2 Colour Screen Print</li>
-    
-    <!-- 3 Colour with tooltip -->
-    <li class="has-tooltip" data-value="3 Colour Screen Print">
-        3 Colour Screen Print
-        <span class="tooltip-trigger">?</span>
-        <div class="custom-tooltip bottom">
-            <div>
-        <p><strong>3 Colour Screen Print</strong></p>
-        <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p> </div>
-        <img src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp" alt="Example of multi-color screen separation" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height=""/>
-        </div>
-    </li>
-    
-    <!-- 4 Colour with tooltip -->
-    <li class="has-tooltip" data-value="4 Colour Screen Print">
-        4 Colour Screen Print
-        <span class="tooltip-trigger">?</span>
-        <div class="custom-tooltip bottom">
-            <div>
-        <p><strong>4 Colour Screen Print</strong></p>
-        <p>Typically refers to CMYK process printing (Cyan, Magenta, Yellow, Black) using 4 screens. Allows full-color reproduction, gradients, and photo-like images via halftone dots. More complex setup but great for detailed, multi-color artwork.</p> </div>
-        <img src="https://external-preview.redd.it/6CPr-8QMVu0b-vmveBm7pRpQxojqNu562p-M2_N8g7k.png?width=640&crop=smart&auto=webp&s=70d66f87964bf90c05d041d91467670032cd01a8" alt="CMYK screen printing color separation angles" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height=""/>
-        </div>
-    </li>
-    </ul>
-    <p class="selected-text">
-      <strong>Selected:</strong> 
-      <span id="selected-option" style="color: #d32f2f;">None</span>
-    </p>
-  </div>
+    <!-- Front Decoration (required) -->
+    <div class="option-group">
+        <label><strong>Choose Decoration On Front <span style="color: red;">*</span></strong></label>
+        <ul id="print-options" class="print-options-list">
+            <li data-value="Embroidery">Embroidery</li>
+            <li data-value="Full Colour Transfer Small">Full Colour Transfer Small</li>
+            <li data-value="Full Colour Transfer Medium">Full Colour Transfer Medium</li>
+            <li data-value="Full Colour Transfer Large">Full Colour Transfer Large</li>
+            <li data-value="1 Colour Screen Print">1 Colour Screen Print</li>
+            <li data-value="2 Colour Screen Print">2 Colour Screen Print</li>
 
-  <!-- Back Decoration -->
-  <div class="option-group">
-    <label><strong>Choose Decoration On Back</strong></label>
-    <select id="decoration-back" class="decoration-select">
-      <option value="">Select an option...</option>
-      <option value="NONE">NONE</option>
-      <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
-      <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
-      <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
-      <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
-      <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
-      <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-      <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-      <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
-      <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
-      <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
-      <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
-    </select>
-  </div>
+            <!-- 3 Colour with tooltip -->
+            <li class="has-tooltip" data-value="3 Colour Screen Print">
+                3 Colour Screen Print
+                <span class="tooltip-trigger">?</span>
+                <div class="custom-tooltip bottom">
+                    <div>
+                <p><strong>3 Colour Screen Print</strong></p>
+                <p>Uses exactly 3 separate screens/inks (spot colors). Ideal for designs with 3 or fewer distinct colors. Each color prints solidly with no halftone dots needed for simple gradients.</p> </div>
+                <img src="https://www.screenprintingnow.com/wp-content/uploads/2024/01/screen-printer-colour-separation-cmyk-close-up.webp" alt="Example of multi-color screen separation" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height=""/>
+                </div>
+            </li>
 
-  <!-- Right Sleeve -->
-  <div class="option-group">
-    <label><strong>Choose Decoration On Right Hand Sleeve</strong></label>
-    <select id="decoration-right" class="decoration-select">
-      <option value="">Select an option...</option>
-      <option value="NONE">NONE</option>
-      <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
-      <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
-      <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
-      <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
-      <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
-      <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-      <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-      <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
-      <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
-      <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
-      <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
-    </select>
-  </div>
-
-  <!-- Left Sleeve -->
-  <div class="option-group">
-    <label><strong>Choose Decoration On Left Hand Sleeve</strong></label>
-    <select id="decoration-left" class="decoration-select">
-      <option value="">Select an option...</option>
-      <option value="NONE">NONE</option>
-      <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
-      <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
-      <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
-      <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
-      <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
-      <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-      <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-      <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
-      <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
-      <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
-      <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
-    </select>
-  </div>
-
-  <!-- Bulk Quantity Header -->
-  <div class="option-group">
-    <strong><label>Choose Product Quantity & Colour</strong></label>
-    <a href="#" class="size_btn">Size Guide</a>
-  </div>
-
-  <!-- Desired total + Multiple toggle -->
-  <div class="bulk-quantity-controls">
-    <p>I would like to print 
-      <input type="number" id="desired-quantity" min="20" placeholder="20" value="" />
-    </p>
-
-    <div class="multiple-toggle">
-      <h4>Multiple Colours</h4>
-      <label class="switch">
-        <input type="checkbox" id="multiple-toggle" />
-        <span class="slider round"></span>
-      </label>
+            <!-- 4 Colour with tooltip -->
+            <li class="has-tooltip" data-value="4 Colour Screen Print">
+                4 Colour Screen Print
+                <span class="tooltip-trigger">?</span>
+                <div class="custom-tooltip bottom">
+                    <div>
+                <p><strong>4 Colour Screen Print</strong></p>
+                <p>Typically refers to CMYK process printing (Cyan, Magenta, Yellow, Black) using 4 screens. Allows full-color reproduction, gradients, and photo-like images via halftone dots. More complex setup but great for detailed, multi-color artwork.</p> </div>
+                <img src="https://external-preview.redd.it/6CPr-8QMVu0b-vmveBm7pRpQxojqNu562p-M2_N8g7k.png?width=640&crop=smart&auto=webp&s=70d66f87964bf90c05d041d91467670032cd01a8" alt="CMYK screen printing color separation angles" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" width="" height=""/>
+                </div>
+            </li>
+        </ul>
+        <p class="selected-text">
+            <strong>Selected:</strong> 
+            <span id="selected-option" style="color: #d32f2f;">None</span>
+        </p>
     </div>
-  </div>
+
+    <!-- Back Decoration -->
+    <div class="option-group">
+        <label><strong>Choose Decoration On Back</strong></label>
+        <select id="decoration-back" class="decoration-select">
+            <option value="">Select an option...</option>
+            <option value="NONE">NONE</option>
+            <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
+            <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
+            <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
+            <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
+            <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
+            <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+            <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+            <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
+            <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
+            <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
+            <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
+        </select>
+    </div>
+
+    <!-- Right Sleeve -->
+    <div class="option-group">
+        <label><strong>Choose Decoration On Right Hand Sleeve</strong></label>
+        <select id="decoration-right" class="decoration-select">
+            <option value="">Select an option...</option>
+            <option value="NONE">NONE</option>
+            <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
+            <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
+            <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
+            <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
+            <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
+            <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+            <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+            <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
+            <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
+            <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
+            <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
+        </select>
+    </div>
+
+    <!-- Left Sleeve -->
+    <div class="option-group">
+        <label><strong>Choose Decoration On Left Hand Sleeve</strong></label>
+        <select id="decoration-left" class="decoration-select">
+            <option value="">Select an option...</option>
+            <option value="NONE">NONE</option>
+            <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
+            <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
+            <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
+            <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
+            <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
+            <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+            <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+            <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
+            <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
+            <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
+            <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
+        </select>
+    </div>
+
+    <!-- Bulk Quantity Header -->
+    <div class="option-group">
+        <label><strong>Choose Product Quantity & Colour</strong></label>
+        <a href="#" class="size_btn">Size Guide</a>
+    </div>
+
+    <div class="option-group artwork-upload-section">
+        <label><strong>Upload Your Artwork (Optional)</strong></label>
+        <p style="font-size: 14px; color: #666; margin-bottom: 10px;">
+        Accepted formats: JPG, PNG, GIF, PDF (Max size: 10MB)
+        </p>
+        
+        <div class="file-input-wrapper">
+            <input type="file" id="artwork-upload" accept="image/jpeg,image/jpg,image/png,image/gif,application/pdf" />
+            <label for="artwork-upload" class="file-input-button">📁 Choose File</label>
+        </div>
+        
+        <div id="artwork-preview-container" class="artwork-preview-container">
+            <button type="button" id="remove-artwork" class="remove-artwork-btn" aria-label="Remove artwork">×</button>
+            <div id="artwork-preview"></div>
+        </div>
+    </div>  
+
+    <!-- Desired total + Multiple toggle -->
+    <div class="bulk-quantity-controls">
+        <p>I would like to print 
+            <input type="number" id="desired-quantity" min="20" placeholder="20" value="" />
+        </p>
+
+        <div class="multiple-toggle">
+            <h4>Multiple Colours</h4>
+            <label class="switch">
+                <input type="checkbox" id="multiple-toggle" />
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
 
     {%- for option in product.options_with_values -%}
     <fieldset class="js product-form__input product-form__input--swatch {{ option.name | downcase }}-swatch">
@@ -1275,21 +1292,20 @@
         {%- endif -%}
     {%- endfor -%}
     </div>
-<div class="buy_now_btn">
-  <!-- Totals & Errors -->
-  <div class="bulk-totals">
-    
-    <p><strong>Total Price (ex GST):</strong> <span id="total-price">$0.00</span></p>
-    <p class="qty">Total Quantity: <span id="total-quantity">0</span> (Minimum 20)</p>
-    <p id="quantity-error" style="color: red; font-weight: bold;"></p>
-  </div>
+    <div class="buy_now_btn">
+    <!-- Totals & Errors -->
+    <div class="bulk-totals">
+        
+        <p><strong>Total Price (ex GST):</strong> <span id="total-price">$0.00</span></p>
+        <p class="qty">Total Quantity: <span id="total-quantity">0</span> (Minimum 20)</p>
+        <p id="quantity-error" style="color: red; font-weight: bold;"></p>
+    </div>
 
-  <button type="button" id="add-to-cart-with-print" class="btn add-to-cart-btn">
-    Add to Cart
-  </button>
-</div>
-
-  <p id="status-message" style="margin-top: 15px; font-weight: bold;"></p>
+    <button type="button" id="add-to-cart-with-print" class="btn add-to-cart-btn">
+        Add to Cart
+    </button>
+    </div>
+    <p id="status-message" style="margin-top: 15px; font-weight: bold;"></p>
 </div>
                                     {%- when 'customization_property' -%}
                                         {% if has_customization_option == true %}

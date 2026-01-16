@@ -5,11 +5,73 @@
 
 // Track selections
 let selectedPrintingMethod = null;
+let uploadedArtwork = null; // Track uploaded artwork
 const selectedDisplay = document.getElementById('selected-option');
 const addButton = document.getElementById('add-to-cart-with-print');
 const statusMessage = document.getElementById('status-message');
 const multipleToggle = document.getElementById('multiple-toggle');
 const desiredQuantityInput = document.getElementById('desired-quantity');
+
+// Artwork upload handling
+const artworkInput = document.getElementById('artwork-upload');
+const artworkPreview = document.getElementById('artwork-preview');
+const artworkPreviewContainer = document.getElementById('artwork-preview-container');
+const removeArtworkBtn = document.getElementById('remove-artwork');
+
+if (artworkInput) {
+  artworkInput.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    
+    if (file) {
+      // Validate file type
+      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/pdf'];
+      if (!validTypes.includes(file.type)) {
+        statusMessage.textContent = 'Please upload a valid image file (JPG, PNG, GIF) or PDF.';
+        statusMessage.style.color = 'red';
+        artworkInput.value = '';
+        return;
+      }
+      
+      // Validate file size (max 10MB)
+      const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+      if (file.size > maxSize) {
+        statusMessage.textContent = 'File size must be less than 10MB.';
+        statusMessage.style.color = 'red';
+        artworkInput.value = '';
+        return;
+      }
+      
+      // Convert to base64
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        uploadedArtwork = {
+          name: file.name,
+          data: event.target.result,
+          type: file.type
+        };
+        
+        // Show preview
+        if (file.type === 'application/pdf') {
+          artworkPreview.innerHTML = `<div class="pdf-preview">📄 ${file.name}</div>`;
+        } else {
+          artworkPreview.innerHTML = `<img src="${event.target.result}" alt="Artwork preview" />`;
+        }
+        artworkPreviewContainer.style.display = 'block';
+        statusMessage.textContent = '';
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+}
+
+if (removeArtworkBtn) {
+  removeArtworkBtn.addEventListener('click', function() {
+    uploadedArtwork = null;
+    artworkInput.value = '';
+    artworkPreview.innerHTML = '';
+    artworkPreviewContainer.style.display = 'none';
+  });
+}
 
 // Main Printing Method selection
 document.getElementById('print-options').addEventListener('click', (e) => {
@@ -133,6 +195,12 @@ addButton.addEventListener('click', async () => {
   if (back && back !== '') properties['Decoration On Back'] = back;
   if (right && right !== '') properties['Decoration On Right Hand Sleeve'] = right;
   if (left && left !== '') properties['Decoration On Left Hand Sleeve'] = left;
+  
+  // Add artwork information if uploaded
+  if (uploadedArtwork) {
+    properties['Artwork File Name'] = uploadedArtwork.name;
+    properties['Artwork Data'] = uploadedArtwork.data;
+  }
 
   // Collect all variants with quantities
   const items = [];
