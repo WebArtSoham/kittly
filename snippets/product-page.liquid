@@ -1011,475 +1011,499 @@
 </script>
 
 <div class="custom-print-section">
-{% comment %}<h3>Select Printing & Decoration Options</h3>{% endcomment %}
+    {%- liquid
+        assign embroidery_image = block.settings.embroidery_image
+        assign embroidery_text = block.settings.embroidery_text
+        assign fcts_image = block.settings.fcts_image
+        assign fcts_text = block.settings.fcts_text
+        assign fctm_image = block.settings.fctm_image
+        assign fctm_text = block.settings.fctm_text
+        assign fctl_image = block.settings.fctl_image
+        assign fctl_text = block.settings.fctl_text
+        assign one_csp_image = block.settings.one_csp_image
+        assign one_csp_text = block.settings.one_csp_text
+        assign two_csp_image = block.settings.two_csp_image
+        assign two_csp_text = block.settings.two_csp_text
+        assign three_csp_image = block.settings.three_csp_image
+        assign three_csp_text = block.settings.three_csp_text
+        assign four_csp_image = block.settings.four_csp_image
+        assign four_csp_text = block.settings.four_csp_text
+    -%}
 
-{%- liquid
-    assign embroidery_image = block.settings.embroidery_image
-    assign embroidery_text = block.settings.embroidery_text
-
-    assign fcts_image = block.settings.fcts_image
-    assign fcts_text = block.settings.fcts_text
-
-    assign fctm_image = block.settings.fctm_image
-    assign fctm_text = block.settings.fctm_text
-
-    assign fctl_image = block.settings.fctl_image
-    assign fctl_text = block.settings.fctl_text
-
-    assign one_csp_image = block.settings.one_csp_image
-    assign one_csp_text = block.settings.one_csp_text
-
-    assign two_csp_image = block.settings.two_csp_image
-    assign two_csp_text = block.settings.two_csp_text
-
-    assign three_csp_image = block.settings.three_csp_image
-    assign three_csp_text = block.settings.three_csp_text
-
-    assign four_csp_image = block.settings.four_csp_image
-    assign four_csp_text = block.settings.four_csp_text
--%}
-
-    <!-- Front Decoration (required) -->
-    <div class="option-group">
-        <label><strong>Choose Decoration On Front <span style="color: red;">*</span></strong></label>
-        <ul id="print-options" class="print-options-list">
-            <li class="has-tooltip" data-value="Embroidery">Embroidery
-                {%- if embroidery_text != blank or embroidery_image != blank -%}
-                <span class="tooltip-trigger">?</span>
-                <div class="custom-tooltip bottom">
-                    <div>
-                    <p><strong>Embroidery</strong></p>
-                    {{ embroidery_text }}
-                    </div>
-                    {%- if embroidery_image != blank -%}
-                    <img
-                        src="{{ embroidery_image | image_url: width: 800 }}"
-                        alt="Example of embroidery"
-                        width="800"
-                        height="{{ embroidery_image.aspect_ratio | times: 800 | round }}"
-                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
-                        loading="lazy"/>
-                    {%- endif -%}
-                </div>
-                {%- endif -%}
-            </li>
-            <li class="has-tooltip" data-value="Full Colour Transfer Small">Full Colour Transfer Small
-                {%- if fcts_text != blank or fcts_image != blank -%}
-                <span class="tooltip-trigger">?</span>
-                <div class="custom-tooltip bottom">
-                    <div>
-                    <p><strong>Full Colour Transfer Small</strong></p>
-                    {{ fcts_text }}
-                    </div>
-                    {%- if fcts_image != blank -%}
-                    <img
-                        src="{{ fcts_image | image_url: width: 800 }}"
-                        alt="Example of full colour transfer small"
-                        width="800"
-                        height="{{ fcts_image.aspect_ratio | times: 800 | round }}"
-                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
-                        loading="lazy"/>
-                    {%- endif -%}
-                </div>
-                {%- endif -%}
-            </li>
-            <li class="has-tooltip" data-value="Full Colour Transfer Medium">Full Colour Transfer Medium
-                {%- if fctm_text != blank or fctm_image != blank -%}
-                <span class="tooltip-trigger">?</span>
-                <div class="custom-tooltip bottom">
-                    <div>
-                    <p><strong>Full Colour Transfer Medium</strong></p>
-                    {{ fctm_text }}
-                    </div>
-                    {%- if fctm_image != blank -%}
-                    <img
-                        src="{{ fctm_image | image_url: width: 800 }}"
-                        alt="Example of full colour transfer medium"
-                        width="800"
-                        height="{{ fctm_image.aspect_ratio | times: 800 | round }}"
-                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
-                        loading="lazy"/>
-                    {%- endif -%}
-                </div>
-                {%- endif -%}
-            </li>
-            <li class="has-tooltip" data-value="Full Colour Transfer Large">Full Colour Transfer Large
-                {%- if fctl_text != blank or fctl_image != blank -%}
-                <span class="tooltip-trigger">?</span>
-                <div class="custom-tooltip bottom">
-                    <div>
-                    <p><strong>Full Colour Transfer Large</strong></p>
-                    {{ fctl_text }}
-                    </div>
-                    {%- if fctl_image != blank -%}
-                    <img
-                        src="{{ fctl_image | image_url: width: 800 }}"
-                        alt="Example of full colour transfer large"
-                        width="800"
-                        height="{{ fctl_image.aspect_ratio | times: 800 | round }}"
-                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
-                        loading="lazy"/>
-                    {%- endif -%}
-                </div>
-                {%- endif -%}
-            </li>
-            <li class="has-tooltip" data-value="1 Colour Screen Print">1 Colour Screen Print
-                {%- if one_csp_text != blank or one_csp_image != blank -%}
-                <span class="tooltip-trigger">?</span>
-                <div class="custom-tooltip bottom">
-                    <div>
-                    <p><strong>1 Colour Screen Print</strong></p>
-                    {{ one_csp_text }}
-                    </div>
-                    {%- if one_csp_image != blank -%}
-                    <img
-                        src="{{ one_csp_image | image_url: width: 800 }}"
-                        alt="Example of 1 colour screen print"
-                        width="800"
-                        height="{{ one_csp_image.aspect_ratio | times: 800 | round }}"
-                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
-                        loading="lazy"/>
-                    {%- endif -%}
-                </div>
-                {%- endif -%}
-            </li>
-            <li class="has-tooltip" data-value="2 Colour Screen Print">2 Colour Screen Print
-                {%- if two_csp_text != blank or two_csp_image != blank -%}
-                <span class="tooltip-trigger">?</span>
-                <div class="custom-tooltip bottom">
-                    <div>
-                    <p><strong>2 Colour Screen Print</strong></p>
-                    {{ two_csp_text }}
-                    </div>
-                    {%- if two_csp_image != blank -%}
-                    <img
-                        src="{{ two_csp_image | image_url: width: 800 }}"
-                        alt="Example of 2 colour screen print"
-                        width="800"
-                        height="{{ two_csp_image.aspect_ratio | times: 800 | round }}"
-                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
-                        loading="lazy"/>
-                    {%- endif -%}
-                </div>
-                {%- endif -%}
-            </li>
-            <li class="has-tooltip" data-value="3 Colour Screen Print">3 Colour Screen Print
-                {%- if three_csp_text != blank or three_csp_image != blank -%}                
-                <span class="tooltip-trigger">?</span>
-                <div class="custom-tooltip bottom">
-                    <div>
-                    <p><strong>3 Colour Screen Print</strong></p>
-                    {{ three_csp_text }}
-                    </div>
-                    {%- if three_csp_image != blank -%}
-                    <img
-                        src="{{ three_csp_image | image_url: width: 800 }}"
-                        alt="Example of 3 colour screen print"
-                        width="800"
-                        height="{{ three_csp_image.aspect_ratio | times: 800 | round }}"
-                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
-                        loading="lazy"/>
-                    {%- endif -%}
-                </div>
-                {%- endif -%}
-            </li>
-            <li class="has-tooltip" data-value="4 Colour Screen Print">4 Colour Screen Print
-                {%- if four_csp_text != blank or four_csp_image != blank -%}
-                <span class="tooltip-trigger">?</span>
-                <div class="custom-tooltip bottom">
-                    <div>
-                    <p><strong>4 Colour Screen Print</strong></p>
-                    {{ four_csp_text }}
-                    </div>
-                    {%- if four_csp_image != blank -%}
-                    <img
-                        src="{{ four_csp_image | image_url: width: 800 }}"
-                        alt="Example of 4 colour (CMYK) screen print"
-                        width="800"
-                        height="{{ four_csp_image.aspect_ratio | times: 800 | round }}"
-                        style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;"
-                        loading="lazy" />
-                    {%- endif -%}
-                </div>
-                {%- endif -%}
-            </li>
-        </ul>
-        <p class="selected-text">
-            <strong>Selected:</strong> 
-            <span id="selected-option" style="color: #d32f2f;">None</span>
-        </p>
-    </div>
-
-    <!-- Back Decoration -->
-    <div class="option-group">
-        <label><strong>Choose Decoration On Back</strong></label>
-        <select id="decoration-back" class="decoration-select">
-            <option value="">Select an option...</option>
-            <option value="NONE">NONE</option>
-            <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
-            <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
-            <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
-            <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
-            <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
-            <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-            <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-            <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
-            <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
-            <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
-            <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
-        </select>
-    </div>
-
-    <!-- Right Sleeve -->
-    <div class="option-group">
-        <label><strong>Choose Decoration On Right Hand Sleeve</strong></label>
-        <select id="decoration-right" class="decoration-select">
-            <option value="">Select an option...</option>
-            <option value="NONE">NONE</option>
-            <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
-            <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
-            <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
-            <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
-            <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
-            <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-            <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-            <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
-            <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
-            <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
-            <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
-        </select>
-    </div>
-
-    <!-- Left Sleeve -->
-    <div class="option-group">
-        <label><strong>Choose Decoration On Left Hand Sleeve</strong></label>
-        <select id="decoration-left" class="decoration-select">
-            <option value="">Select an option...</option>
-            <option value="NONE">NONE</option>
-            <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
-            <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
-            <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
-            <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
-            <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
-            <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-            <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
-            <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
-            <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
-            <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
-            <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
-        </select>
-    </div>
-
-    <!-- Bulk Quantity Header -->
-    <div class="option-group">
-        <label><strong>Choose Product Quantity & Colour</strong></label>
-        {% comment %}<a href="#" class="size_btn">Size Guide</a> {% endcomment %}
-    </div>
-
-    <!-- Artwork Upload Section -->
-    <div class="option-group artwork-upload-section">
-        <label><strong>Upload Your Artwork (Optional)</strong></label>
-        <p style="font-size: 14px; color: #666; margin-bottom: 10px;">
-            Accepted formats: JPG, PNG, PDF, AI, EPS. Max file size: 10MB
-        </p>
-        
-        <div class="file-upload-wrapper">
-            <input type="file" 
-                id="artwork-upload" 
-                accept=".jpg,.jpeg,.png,.pdf,.ai,.eps"
-                style="display: none;" />
-            <label for="artwork-upload" class="file-upload-btn">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="margin-right: 8px;">
-                <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            Choose File
-            </label>
-            <span id="file-name" style="margin-left: 10px; color: #666;">No file chosen</span>
-        </div>
-        
-        <!-- Image Preview Container -->
-        <div id="artwork-preview-container" style="display: none; margin-top: 15px;">
-            <div class="artwork-preview-wrapper">
-            <img id="artwork-preview" src="" alt="Artwork preview" style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px;" width="" height="" />
-            <button type="button" id="remove-artwork" class="remove-artwork-btn" aria-label="Remove artwork" style="display: none;">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
+    {% form 'contact', id: 'bulk-order-form' %}
+        {% if form.posted_successfully? %}
+            <div class="form-success-message" style="padding: 15px; margin-bottom: 20px; background-color: #d4edda; border: 1px solid #c3e6cb; border-radius: 4px; color: #155724;">
+                <p><strong>Thank you for your enquiry!</strong> We'll get back to you soon regarding your bulk order.</p>
             </div>
-            <p id="artwork-file-info" style="font-size: 12px; color: #666; margin-top: 5px;"></p>
+            <script>
+                // Scroll to top to show success message
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            </script>
+        {% endif %}
+
+        {% if form.errors %}
+            <div class="form-error-message" style="padding: 15px; margin-bottom: 20px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; color: #721c24;">
+                <p><strong>Please fix the following errors:</strong></p>
+                <ul style="margin: 10px 0 0 20px;">
+                    {% for field in form.errors %}
+                        <li>{{ field | capitalize }} {{ form.errors.messages[field] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Hidden fields for product information -->
+        <input type="hidden" name="contact[subject]" value="Bulk Order Enquiry - {{ product.title }}" />
+        <input type="hidden" name="contact[product]" value="{{ product.title }}" id="hidden-product">
+        <input type="hidden" name="contact[product_url]" value="{{ shop.url }}{{ product.url }}" id="hidden-product-url">
+        <input type="hidden" name="contact[front_decoration]" value="" id="hidden-front-decoration">
+        <input type="hidden" name="contact[back_decoration]" value="" id="hidden-back-decoration">
+        <input type="hidden" name="contact[right_sleeve]" value="" id="hidden-right-sleeve">
+        <input type="hidden" name="contact[left_sleeve]" value="" id="hidden-left-sleeve">
+        <input type="hidden" name="contact[total_quantity]" value="" id="hidden-total-quantity">
+        <input type="hidden" name="contact[total_price]" value="" id="hidden-total-price">
+        <input type="hidden" name="contact[order_details]" value="" id="hidden-order-details">
+        <input type="hidden" name="contact[artwork_file_name]" value="" id="hidden-artwork-filename">
+        <input type="hidden" name="contact[artwork_file_size]" value="" id="hidden-artwork-filesize">
+
+        <!-- Front Decoration (required) -->
+        <div class="option-group">
+            <label><strong>Choose Decoration On Front <span style="color: red;">*</span></strong></label>
+            <ul id="print-options" class="print-options-list">
+                <li class="has-tooltip" data-value="Embroidery">Embroidery
+                    {%- if embroidery_text != blank or embroidery_image != blank -%}
+                    <span class="tooltip-trigger">?</span>
+                    <div class="custom-tooltip bottom">
+                        <div>
+                        <p><strong>Embroidery</strong></p>
+                        {{ embroidery_text }}
+                        </div>
+                        {%- if embroidery_image != blank -%}
+                        <img src="{{ embroidery_image | image_url: width: 800 }}" alt="Example of embroidery" width="800" height="{{ embroidery_image.aspect_ratio | times: 800 | round }}" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" loading="lazy"/>
+                        {%- endif -%}
+                    </div>
+                    {%- endif -%}
+                </li>
+                <li class="has-tooltip" data-value="Full Colour Transfer Small">Full Colour Transfer Small
+                    {%- if fcts_text != blank or fcts_image != blank -%}
+                    <span class="tooltip-trigger">?</span>
+                    <div class="custom-tooltip bottom">
+                        <div>
+                        <p><strong>Full Colour Transfer Small</strong></p>
+                        {{ fcts_text }}
+                        </div>
+                        {%- if fcts_image != blank -%}
+                        <img src="{{ fcts_image | image_url: width: 800 }}" alt="Example of full colour transfer small" width="800" height="{{ fcts_image.aspect_ratio | times: 800 | round }}" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" loading="lazy"/>
+                        {%- endif -%}
+                    </div>
+                    {%- endif -%}
+                </li>
+                <li class="has-tooltip" data-value="Full Colour Transfer Medium">Full Colour Transfer Medium
+                    {%- if fctm_text != blank or fctm_image != blank -%}
+                    <span class="tooltip-trigger">?</span>
+                    <div class="custom-tooltip bottom">
+                        <div>
+                        <p><strong>Full Colour Transfer Medium</strong></p>
+                        {{ fctm_text }}
+                        </div>
+                        {%- if fctm_image != blank -%}
+                        <img src="{{ fctm_image | image_url: width: 800 }}" alt="Example of full colour transfer medium" width="800" height="{{ fctm_image.aspect_ratio | times: 800 | round }}" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" loading="lazy"/>
+                        {%- endif -%}
+                    </div>
+                    {%- endif -%}
+                </li>
+                <li class="has-tooltip" data-value="Full Colour Transfer Large">Full Colour Transfer Large
+                    {%- if fctl_text != blank or fctl_image != blank -%}
+                    <span class="tooltip-trigger">?</span>
+                    <div class="custom-tooltip bottom">
+                        <div>
+                        <p><strong>Full Colour Transfer Large</strong></p>
+                        {{ fctl_text }}
+                        </div>
+                        {%- if fctl_image != blank -%}
+                        <img src="{{ fctl_image | image_url: width: 800 }}" alt="Example of full colour transfer large" width="800" height="{{ fctl_image.aspect_ratio | times: 800 | round }}" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" loading="lazy"/>
+                        {%- endif -%}
+                    </div>
+                    {%- endif -%}
+                </li>
+                <li class="has-tooltip" data-value="1 Colour Screen Print">1 Colour Screen Print
+                    {%- if one_csp_text != blank or one_csp_image != blank -%}
+                    <span class="tooltip-trigger">?</span>
+                    <div class="custom-tooltip bottom">
+                        <div>
+                        <p><strong>1 Colour Screen Print</strong></p>
+                        {{ one_csp_text }}
+                        </div>
+                        {%- if one_csp_image != blank -%}
+                        <img src="{{ one_csp_image | image_url: width: 800 }}" alt="Example of 1 colour screen print" width="800" height="{{ one_csp_image.aspect_ratio | times: 800 | round }}" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" loading="lazy"/>
+                        {%- endif -%}
+                    </div>
+                    {%- endif -%}
+                </li>
+                <li class="has-tooltip" data-value="2 Colour Screen Print">2 Colour Screen Print
+                    {%- if two_csp_text != blank or two_csp_image != blank -%}
+                    <span class="tooltip-trigger">?</span>
+                    <div class="custom-tooltip bottom">
+                        <div>
+                        <p><strong>2 Colour Screen Print</strong></p>
+                        {{ two_csp_text }}
+                        </div>
+                        {%- if two_csp_image != blank -%}
+                        <img src="{{ two_csp_image | image_url: width: 800 }}" alt="Example of 2 colour screen print" width="800" height="{{ two_csp_image.aspect_ratio | times: 800 | round }}" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" loading="lazy"/>
+                        {%- endif -%}
+                    </div>
+                    {%- endif -%}
+                </li>
+                <li class="has-tooltip" data-value="3 Colour Screen Print">3 Colour Screen Print
+                    {%- if three_csp_text != blank or three_csp_image != blank -%}                
+                    <span class="tooltip-trigger">?</span>
+                    <div class="custom-tooltip bottom">
+                        <div>
+                        <p><strong>3 Colour Screen Print</strong></p>
+                        {{ three_csp_text }}
+                        </div>
+                        {%- if three_csp_image != blank -%}
+                        <img src="{{ three_csp_image | image_url: width: 800 }}" alt="Example of 3 colour screen print" width="800" height="{{ three_csp_image.aspect_ratio | times: 800 | round }}" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" loading="lazy"/>
+                        {%- endif -%}
+                    </div>
+                    {%- endif -%}
+                </li>
+                <li class="has-tooltip" data-value="4 Colour Screen Print">4 Colour Screen Print
+                    {%- if four_csp_text != blank or four_csp_image != blank -%}
+                    <span class="tooltip-trigger">?</span>
+                    <div class="custom-tooltip bottom">
+                        <div>
+                        <p><strong>4 Colour Screen Print</strong></p>
+                        {{ four_csp_text }}
+                        </div>
+                        {%- if four_csp_image != blank -%}
+                        <img src="{{ four_csp_image | image_url: width: 800 }}" alt="Example of 4 colour (CMYK) screen print" width="800" height="{{ four_csp_image.aspect_ratio | times: 800 | round }}" style="max-width:100%; height:auto; margin-top:8px; border-radius:4px;" loading="lazy" />
+                        {%- endif -%}
+                    </div>
+                    {%- endif -%}
+                </li>
+            </ul>
+            <p class="selected-text">
+                <strong>Selected:</strong> 
+                <span id="selected-option" style="color: #d32f2f;">None</span>
+            </p>
         </div>
-    </div>
 
-    <!-- Multiple toggle only (removed "I would like to print" input) -->
-    <div class="bulk-quantity-controls">
-    <div class="multiple-toggle">
-        <h4>Multiple Colours</h4>
-        <label class="switch">
-        <input type="checkbox" id="multiple-toggle" />
-        <span class="slider round"></span>
-        </label>
-    </div>
-    </div>
+        <!-- Back Decoration -->
+        <div class="option-group">
+            <label><strong>Choose Decoration On Back</strong></label>
+            <select id="decoration-back" class="decoration-select">
+                <option value="">Select an option...</option>
+                <option value="NONE">NONE</option>
+                <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
+                <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
+                <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
+                <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
+                <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
+                <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+                <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+                <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
+                <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
+                <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
+                <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
+            </select>
+        </div>
 
-    {%- for option in product.options_with_values -%}
-    <fieldset class="js product-form__input product-form__input--swatch {{ option.name | downcase }}-swatch">
-        <legend class="form__label">{{ option.name }}:</legend>
-        
-        {%- for value in option.values -%}
-        {%- liquid
-            assign metaobject_color = value.swatch.color
-            assign metaobject_image = value.swatch.image
-            assign has_image = false
-            assign background_color = ''
-            assign background_image = ''
+        <!-- Right Sleeve -->
+        <div class="option-group">
+            <label><strong>Choose Decoration On Right Hand Sleeve</strong></label>
+            <select id="decoration-right" class="decoration-select">
+                <option value="">Select an option...</option>
+                <option value="NONE">NONE</option>
+                <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
+                <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
+                <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
+                <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
+                <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
+                <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+                <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+                <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
+                <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
+                <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
+                <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
+            </select>
+        </div>
 
-            if metaobject_image != blank
-            assign swatch_image_url = metaobject_image | image_url: width: 100
-            assign background_image = swatch_image_url
-            assign has_image = true
-            elsif metaobject_color != blank
-            assign background_color = metaobject_color
-            endif
+        <!-- Left Sleeve -->
+        <div class="option-group">
+            <label><strong>Choose Decoration On Left Hand Sleeve</strong></label>
+            <select id="decoration-left" class="decoration-select">
+                <option value="">Select an option...</option>
+                <option value="NONE">NONE</option>
+                <option value="SMALL EMBROIDERY UP TO 5K STITCHES">SMALL EMBROIDERY UP TO 5K STITCHES</option>
+                <option value="MEDIUM EMBROIDERY UP TO 10K STITCHES">MEDIUM EMBROIDERY UP TO 10K STITCHES</option>
+                <option value="LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE">LARGE EMBROIDERY UP TO 15K STITCHES 18CM WIDE</option>
+                <option value="EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM">EXTRA LARGE EMBROIDERY 20K EMBROIDERY OVER 18CM</option>
+                <option value="SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)">SMALL FULL COLOUR DIGITAL TRANSFER 10X10CM (SUPERCOLOUR)</option>
+                <option value="A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A4 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+                <option value="A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)">A3 FULL COLOUR DIGITAL TRANSFER (SUPERCOLOUR)</option>
+                <option value="1 COLOUR SCREENPRINT">1 COLOUR SCREENPRINT</option>
+                <option value="2 COLOUR SCREENPRINT">2 COLOUR SCREENPRINT</option>
+                <option value="3 COLOUR SCREENPRINT">3 COLOUR SCREENPRINT</option>
+                <option value="4 COLOUR SCREENPRINT">4 COLOUR SCREENPRINT</option>
+            </select>
+        </div>
+
+        <!-- Bulk Quantity Header -->
+        <div class="option-group">
+            <label><strong>Choose Product Quantity & Colour</strong></label>
+        </div>
+
+        <!-- Artwork Upload Section -->
+        <div class="option-group artwork-upload-section">
+            <label><strong>Upload Your Artwork (Optional)</strong></label>
+            <p style="font-size: 14px; color: #666; margin-bottom: 10px;">
+                Accepted formats: JPG, PNG, PDF, AI, EPS. Max file size: 10MB
+            </p>
             
-            assign option_available = false
-            assign option_index = option.position | minus: 1
-            for variant in product.variants
-            if variant.options[option_index] == value and variant.available
-                assign option_available = true
-                break
-            endif
-            endfor
-        -%}
+            <div class="file-upload-wrapper">
+                <input type="file" id="artwork-upload" accept=".jpg,.jpeg,.png,.pdf,.ai,.eps" style="display: none;" />
+                <label for="artwork-upload" class="file-upload-btn">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="margin-right: 8px;">
+                    <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Choose File Here
+                </label>
+                <span id="file-name" style="margin-left: 10px; color: #666;">No file chosen</span>
+            </div>
+            
+            <!-- Image Preview Container -->
+            <div id="artwork-preview-container" style="display: none; margin-top: 15px;">
+                <div class="artwork-preview-wrapper">
+                <img id="artwork-preview" src="" alt="Artwork preview" style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 4px;" width="" height="" />
+                <button type="button" id="remove-artwork" class="remove-artwork-btn" aria-label="Remove artwork" style="display: none;">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                </div>
+                <p id="artwork-file-info" style="font-size: 12px; color: #666; margin-top: 5px;"></p>
+            </div>
+        </div>
 
-        <input type="checkbox"
-            id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-            name="{{ option.name }}"
-            value="{{ value | escape }}"
-            form="{{ product_form_id | default: 'product-form' }}"
-            class="swatch-input"
-            data-option-value="{{ value | escape }}"
-            data-option-name="{{ option.name | escape }}"
-            {% if forloop.first %}checked{% endif %}
-            {% unless option_available %}disabled{% endunless %}
-        />
-        
-        <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-            class="swatch-label {% unless option_available %}soldout{% endunless %}"
-            title="{{ value | escape }}"
-            style="{% if has_image %}background-image: url({{ background_image }});{% else %}background-color: {{ background_color }};{% endif %} background-size: cover; background-position: center;"
-        >
-            <span class="visually-hidden">{{ value }}</span>
-        </label>
-        {%- endfor -%}
-    </fieldset>
-    {%- endfor -%}
+        <!-- Multiple toggle -->
+        <div class="bulk-quantity-controls">
+        <div class="multiple-toggle">
+            <h4>Multiple Colours</h4>
+            <label class="switch">
+            <input type="checkbox" id="multiple-toggle" />
+            <span class="slider round"></span>
+            </label>
+        </div>
+        </div>
 
-    {%- comment -%} Size Availability Tables Container {%- endcomment -%}
-    <div class="size-availability-container" style="margin-top: 20px;">
-    {%- for option in product.options_with_values -%}
-        {%- if option.name == 'Color' or option.name == 'Colour' -%}
-        {%- assign color_option_index = option.position | minus: 1 -%}
-        {%- for color_value in option.values -%}
+        {%- for option in product.options_with_values -%}
+        <fieldset class="js product-form__input product-form__input--swatch {{ option.name | downcase }}-swatch">
+            <legend class="form__label">{{ option.name }}:</legend>
+            
+            {%- for value in option.values -%}
             {%- liquid
-                assign metaobject_color = color_value.swatch.color
-                assign metaobject_image = color_value.swatch.image
+                assign metaobject_color = value.swatch.color
+                assign metaobject_image = value.swatch.image
                 assign has_image = false
                 assign background_color = ''
                 assign background_image = ''
 
                 if metaobject_image != blank
-                    assign swatch_image_url = metaobject_image | image_url: width: 100
-                    assign background_image = swatch_image_url
-                    assign has_image = true
+                assign swatch_image_url = metaobject_image | image_url: width: 100
+                assign background_image = swatch_image_url
+                assign has_image = true
                 elsif metaobject_color != blank
-                    assign background_color = metaobject_color
+                assign background_color = metaobject_color
                 endif
+                
+                assign option_available = false
+                assign option_index = option.position | minus: 1
+                for variant in product.variants
+                if variant.options[option_index] == value and variant.available
+                    assign option_available = true
+                    break
+                endif
+                endfor
             -%}
+
+            <input type="checkbox"
+                id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                name="{{ option.name }}"
+                value="{{ value | escape }}"
+                form="bulk-order-form"
+                class="swatch-input"
+                data-option-value="{{ value | escape }}"
+                data-option-name="{{ option.name | escape }}"
+                {% if forloop.first %}checked{% endif %}
+                {% unless option_available %}disabled{% endunless %}
+            />
             
-            <div class="size-table" data-color="{{ color_value | escape }}" {% if forloop.first %}style="display: block;"{% else %}style="display: none;"{% endif %}>
-            <div class="size-table-header">
-                <h4>
-                    <span class="color-badge" style="{% if has_image %}background-image: url({{ background_image }});{% else %}background-color: {{ background_color }};{% endif %} background-size: cover; background-position: center;"></span>
-                    {{ color_value }}
-                </h4>
-                <button type="button" class="remove-color-btn" data-color="{{ color_value | escape }}" aria-label="Remove {{ color_value }}">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-                </button>
-            </div>
-            <div class="size-options">
-                {%- for size_option in product.options_with_values -%}
-                {%- if size_option.name == 'Size' -%}
-                    {%- assign size_option_index = size_option.position | minus: 1 -%}
-                    {%- for size_value in size_option.values -%}
-                    {%- liquid
-                        assign size_available = false
-                        assign size_quantity = 0
-                        assign variant_id = ''
-                        assign variant_price = 0
-                        for variant in product.variants
-                        if variant.options[color_option_index] == color_value and variant.options[size_option_index] == size_value
-                            if variant.available
-                            assign size_available = true
-                            assign size_quantity = variant.inventory_quantity
-                            assign variant_id = variant.id
-                            assign variant_price = variant.price
-                            endif
-                            break
-                        endif
-                        endfor
-                    -%}
-                    
-                    <div class="size-item {% unless size_available %}soldout{% endunless %}" 
-                        data-variant-id="{{ variant_id }}" 
-                        data-variant-price="{{ variant_price }}"
-                        data-color="{{ color_value | escape }}"
-                        data-size="{{ size_value | escape }}">
-                        <input type="number" 
-                            class="size-quantity-input" 
-                            min="0" 
-                            value="0"
-                            placeholder="0"
-                            data-variant-id="{{ variant_id }}"
-                            data-variant-price="{{ variant_price }}"
-                            {% unless size_available %}disabled{% endunless %} />
-                        <div class="size-label">{{ size_value }}</div>
-                        <div class="size-quantity">
-                        {% if size_available %}
-                            {{ size_quantity }}+ in stock
-                        {% else %}
-                            Out of stock
-                        {% endif %}
-                        </div>
-                    </div>
-                    {%- endfor -%}
-                {%- endif -%}
-                {%- endfor -%}
-            </div>
-            </div>
+            <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                class="swatch-label {% unless option_available %}soldout{% endunless %}"
+                title="{{ value | escape }}"
+                style="{% if has_image %}background-image: url({{ background_image }});{% else %}background-color: {{ background_color }};{% endif %} background-size: cover; background-position: center;"
+            >
+                <span class="visually-hidden">{{ value }}</span>
+            </label>
+            {%- endfor -%}
+        </fieldset>
         {%- endfor -%}
-        {%- endif -%}
-    {%- endfor -%}
-    </div>
 
-    <div class="buy_now_btn">
-    <!-- Totals & Errors -->
-    <div class="bulk-totals">
-        <p><strong>Total Price (ex GST):</strong> <span id="total-price">$0.00</span></p>
-        <p class="qty">Total Quantity: <span id="total-quantity">0</span> (Minimum 20)</p>
-        <p id="quantity-error" style="color: red; font-weight: bold;"></p>
-    </div>
+        {%- comment -%} Size Availability Tables Container {%- endcomment -%}
+        <div class="size-availability-container" style="margin-top: 20px;">
+        {%- for option in product.options_with_values -%}
+            {%- if option.name == 'Color' or option.name == 'Colour' -%}
+            {%- assign color_option_index = option.position | minus: 1 -%}
+            {%- for color_value in option.values -%}
+                {%- liquid
+                    assign metaobject_color = color_value.swatch.color
+                    assign metaobject_image = color_value.swatch.image
+                    assign has_image = false
+                    assign background_color = ''
+                    assign background_image = ''
 
-    <button type="button" id="add-to-cart-with-print" class="btn add-to-cart-btn">
-        Add to Cart
-    </button>
-    </div>
+                    if metaobject_image != blank
+                        assign swatch_image_url = metaobject_image | image_url: width: 100
+                        assign background_image = swatch_image_url
+                        assign has_image = true
+                    elsif metaobject_color != blank
+                        assign background_color = metaobject_color
+                    endif
+                -%}
+                
+                <div class="size-table" data-color="{{ color_value | escape }}" {% if forloop.first %}style="display: block;"{% else %}style="display: none;"{% endif %}>
+                <div class="size-table-header">
+                    <h4>
+                        <span class="color-badge" style="{% if has_image %}background-image: url({{ background_image }});{% else %}background-color: {{ background_color }};{% endif %} background-size: cover; background-position: center;"></span>
+                        {{ color_value }}
+                    </h4>
+                    <button type="button" class="remove-color-btn" data-color="{{ color_value | escape }}" aria-label="Remove {{ color_value }}">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    </button>
+                </div>
+                <div class="size-options">
+                    {%- for size_option in product.options_with_values -%}
+                    {%- if size_option.name == 'Size' -%}
+                        {%- assign size_option_index = size_option.position | minus: 1 -%}
+                        {%- for size_value in size_option.values -%}
+                        {%- liquid
+                            assign size_available = false
+                            assign size_quantity = 0
+                            assign variant_id = ''
+                            assign variant_price = 0
+                            for variant in product.variants
+                            if variant.options[color_option_index] == color_value and variant.options[size_option_index] == size_value
+                                if variant.available
+                                assign size_available = true
+                                assign size_quantity = variant.inventory_quantity
+                                assign variant_id = variant.id
+                                assign variant_price = variant.price
+                                endif
+                                break
+                            endif
+                            endfor
+                        -%}
+                        
+                        <div class="size-item {% unless size_available %}soldout{% endunless %}" 
+                            data-variant-id="{{ variant_id }}" 
+                            data-variant-price="{{ variant_price }}"
+                            data-color="{{ color_value | escape }}"
+                            data-size="{{ size_value | escape }}">
+                            <input type="number" 
+                                class="size-quantity-input" 
+                                min="0" 
+                                value="0"
+                                placeholder="0"
+                                data-variant-id="{{ variant_id }}"
+                                data-variant-price="{{ variant_price }}"
+                                {% unless size_available %}disabled{% endunless %} />
+                            <div class="size-label">{{ size_value }}</div>
+                            <div class="size-quantity">
+                            {% if size_available %}
+                                {{ size_quantity }}+ in stock
+                            {% else %}
+                                Out of stock
+                            {% endif %}
+                            </div>
+                        </div>
+                        {%- endfor -%}
+                    {%- endif -%}
+                    {%- endfor -%}
+                </div>
+                </div>
+            {%- endfor -%}
+            {%- endif -%}
+        {%- endfor -%}
+        </div>
 
-    <p id="status-message" style="margin-top: 15px; font-weight: bold;"></p>
-</div>
-                                    {%- when 'customization_property' -%}
+        <!-- Customer Information Section -->
+        <div class="customer-info-section" style="margin-top: 30px; padding: 20px; background-color: #f9f9f9; border-radius: 8px;">
+            <h3 style="margin-top: 0;">Your Contact Information</h3>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="contact_name" style="display: block; margin-bottom: 5px; font-weight: 600;">Name *</label>
+                <input 
+                    type="text" 
+                    id="contact_name"
+                    name="contact[name]" 
+                    placeholder="Your Name" 
+                    required
+                    value="{% if customer %}{{ customer.name }}{% endif %}"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="contact_email" style="display: block; margin-bottom: 5px; font-weight: 600;">Email *</label>
+                <input 
+                    type="email" 
+                    id="contact_email"
+                    name="contact[email]" 
+                    placeholder="your.email@example.com" 
+                    required
+                    value="{% if customer %}{{ customer.email }}{% endif %}"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label for="contact_phone" style="display: block; margin-bottom: 5px; font-weight: 600;">Phone Number</label>
+                <input 
+                    type="tel" 
+                    id="contact_phone"
+                    name="contact[phone]" 
+                    placeholder="Your Phone Number"
+                    value="{% if customer %}{{ customer.phone }}{% endif %}"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+                <label for="contact_message" style="display: block; margin-bottom: 5px; font-weight: 600;">Additional Message (Optional)</label>
+                <textarea 
+                    id="contact_message"
+                    name="contact[body]" 
+                    placeholder="Any special requests or questions..."
+                    rows="4"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; resize: vertical;"></textarea>
+            </div>
+        </div>
+
+        <div class="buy_now_btn">
+            <!-- Totals & Errors -->
+            <div class="bulk-totals">
+                <p><strong>Total Price (ex GST):</strong> <span id="total-price">$0.00</span></p>
+                <p class="qty">Total Quantity: <span id="total-quantity">0</span> (Minimum 20)</p>
+                <p id="quantity-error" style="color: red; font-weight: bold;"></p>
+            </div>
+
+            <button type="submit" id="submit-enquiry-btn" class="btn add-to-cart-btn">
+                Send Enquiry
+            </button>
+        </div>
+
+    {% endform %}
+</div>                                    {%- when 'customization_property' -%}
                                         {% if has_customization_option == true %}
                                             <div class="productView-moreItem{% if settings.banner_animation == 'effect_fade_up' %} scroll-trigger animate--slide-in{% endif %}"
                                                 style="--spacing-top: {{ spacing_top | append: 'px' }};
