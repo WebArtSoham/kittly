@@ -113,8 +113,12 @@
   gap: 6px;                     /* space between text and ? */
   /* position: relative; */
   position: unset !important;
+  position: relative !important;
 }
-
+.print-options-list li.has-tooltip:nth-child(even) .custom-tooltip{
+  left: unset;
+  right: 0;
+}
 .tooltip-trigger {
   display: inline-block;
   width: 18px;
@@ -139,17 +143,18 @@
   visibility: hidden;
   opacity: 0;
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  /* transform: translateX(-50%); */
   /* bottom: -10px;  */
-  bottom: -30%;
+  /* bottom: -30%; */
+      top: calc(100% + 10px);
   background: #1e1e1e;
   color: #f0f0f0;
   padding: 12px 16px;
   border-radius: 6px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.5);
   z-index: 100;
-  width: 100%;
+  width: 397px;
   font-size: 13px;
   line-height: 1.5;
   pointer-events: none;
@@ -440,7 +445,8 @@ input:checked + .slider:before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top right, transparent 45%, #ff0000 45%, #ff0000 55%, transparent 55%);
+  /* background: linear-gradient(to top right, transparent 45%, #ff0000 45%, #ff0000 55%, transparent 55%); */
+  background:linear-gradient(to top right,transparent 51%,#ff0000 45%,#ff0000 55%,transparent 55%);
 }
 
 /* ─────────────────────────────────────────────
@@ -502,9 +508,8 @@ input:checked + .slider:before {
 }
 
 .size-options {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); */
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 10px;
 }
 
@@ -515,7 +520,7 @@ input:checked + .slider:before {
   text-align: center;
   background: white;
       width: 100%;
-    max-width: 23%;
+    /* max-width: 23%; */
     position: relative;
 }
 .size-item::after{
@@ -549,12 +554,19 @@ input:checked + .slider:before {
 }
 
 .size-label {
-  font-weight: 600;
-  font-size: 18px;
-  margin-bottom: 5px;
-  display: block;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 0;
+    display: block;
+    margin-top: 10px;
 }
-
+.file-upload-btn svg{
+  width: 2rem;
+    height: 2rem;
+}
+.remove-color-btn svg{
+  margin-top: -10px;
+}
 .size-quantity {
   font-size: 12px;
   color: #666;

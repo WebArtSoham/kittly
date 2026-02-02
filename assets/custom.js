@@ -2,11 +2,10 @@
 //   window.location.replace("https://kittly.com/pages/register");
 //   console.log("URL Redirected");
 // }
-
 // Track selections
 let selectedPrintingMethod = null;
 const selectedDisplay = document.getElementById('selected-option');
-const addButton = document.getElementById('add-to-cart-with-print');
+const submitButton = document.getElementById('submit-enquiry-btn');
 const statusMessage = document.getElementById('status-message');
 const multipleToggle = document.getElementById('multiple-toggle');
 
@@ -28,7 +27,7 @@ artworkInput.addEventListener('change', function(e) {
   if (!file) return;
   
   // Validate file size (10MB max)
-  const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+  const maxSize = 10 * 1024 * 1024;
   if (file.size > maxSize) {
     alert('File size exceeds 10MB. Please choose a smaller file.');
     artworkInput.value = '';
@@ -64,7 +63,7 @@ artworkInput.addEventListener('change', function(e) {
     }
     
     previewContainer.style.display = 'block';
-    removeArtworkBtn.style.display = 'flex'; // Show remove button when image is uploaded
+    removeArtworkBtn.style.display = 'flex';
   };
   
   reader.readAsDataURL(file);
@@ -78,7 +77,7 @@ removeArtworkBtn.addEventListener('click', function() {
   fileNameDisplay.textContent = 'No file chosen';
   previewContainer.style.display = 'none';
   previewImage.src = '';
-  removeArtworkBtn.style.display = 'none'; // Hide remove button
+  removeArtworkBtn.style.display = 'none';
 });
 
 // Main Printing Method selection
@@ -90,40 +89,10 @@ document.getElementById('print-options').addEventListener('click', (e) => {
     selectedPrintingMethod = e.target.getAttribute('data-value');
     selectedDisplay.textContent = selectedPrintingMethod;
     
-    updateAddButtonState();
+    // Update hidden field
+    document.getElementById('hidden-front-decoration').value = selectedPrintingMethod;
   }
 });
-
-// Improved variant detection
-function getCurrentVariantId() {
-  const variantInput = document.querySelector('select[name="id"], input[name="id"][type="hidden"], input[name="id"]');
-  
-  if (variantInput) {
-    const val = variantInput.value;
-    if (val && !isNaN(val)) {
-      return parseInt(val);
-    }
-  }
-  
-  if (typeof product !== 'undefined' && product.selected_or_first_available_variant) {
-    return product.selected_or_first_available_variant.id;
-  }
-  
-  return null;
-}
-
-function updateAddButtonState() {
-  const variantId = getCurrentVariantId();
-  addButton.disabled = false;
-}
-
-document.addEventListener('change', (e) => {
-  if (e.target.name === 'id') {
-    updateAddButtonState();
-  }
-});
-
-updateAddButtonState();
 
 // Calculate totals from variation boxes only
 function calculateTotals() {
@@ -142,6 +111,10 @@ function calculateTotals() {
 
   document.getElementById('total-quantity').textContent = totalQuantity;
   document.getElementById('total-price').textContent = '$' + totalPrice.toFixed(2);
+  
+  // Update hidden fields
+  document.getElementById('hidden-total-quantity').value = totalQuantity;
+  document.getElementById('hidden-total-price').value = '$' + totalPrice.toFixed(2);
 
   const errorElement = document.getElementById('quantity-error');
   if (totalQuantity > 0 && totalQuantity < 20) {
@@ -160,106 +133,82 @@ document.addEventListener('input', (e) => {
   }
 });
 
-// Add to cart with bulk orders and artwork
-addButton.addEventListener('click', async () => {
+// Update decoration dropdowns to populate hidden fields
+document.getElementById('decoration-back').addEventListener('change', function() {
+  document.getElementById('hidden-back-decoration').value = this.value;
+});
+
+document.getElementById('decoration-right').addEventListener('change', function() {
+  document.getElementById('hidden-right-sleeve').value = this.value;
+});
+
+document.getElementById('decoration-left').addEventListener('change', function() {
+  document.getElementById('hidden-left-sleeve').value = this.value;
+});
+
+// Handle form submission with validation
+document.getElementById('bulk-order-form').addEventListener('submit', function(e) {
+  // Validate printing method
   if (!selectedPrintingMethod) {
-    statusMessage.textContent = 'Please select a printing method.';
+    e.preventDefault();
+    statusMessage.textContent = 'Please select a printing method for the front decoration.';
     statusMessage.style.color = 'red';
+    
+    // Scroll to printing method section
+    document.getElementById('print-options').scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
 
   const { totalQuantity } = calculateTotals();
 
+  // Validate minimum quantity
   if (totalQuantity < 20) {
+    e.preventDefault();
     statusMessage.textContent = 'Minimum order quantity is 20. Please add more items.';
     statusMessage.style.color = 'red';
+    
+    // Scroll to quantity section
+    document.querySelector('.size-availability-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
 
-  // Collect decoration values
-  const back = document.getElementById('decoration-back').value;
-  const right = document.getElementById('decoration-right').value;
-  const left = document.getElementById('decoration-left').value;
-
-  const properties = {
-    'Front/Chest Printing Method': selectedPrintingMethod
-  };
-
-  if (back && back !== '') properties['Decoration On Back'] = back;
-  if (right && right !== '') properties['Decoration On Right Hand Sleeve'] = right;
-  if (left && left !== '') properties['Decoration On Left Hand Sleeve'] = left;
+  // Build order details
+  const orderDetails = buildOrderDetails();
+  document.getElementById('hidden-order-details').value = orderDetails;
   
-  // Add artwork information if uploaded
+  // Add artwork info to hidden fields
   if (uploadedArtworkFile) {
-    properties['Artwork File Name'] = uploadedArtworkFile.name;
-    properties['Artwork File Size'] = `${(uploadedArtworkFile.size / 1024).toFixed(2)} KB`;
+    document.getElementById('hidden-artwork-filename').value = uploadedArtworkFile.name;
+    document.getElementById('hidden-artwork-filesize').value = `${(uploadedArtworkFile.size / 1024).toFixed(2)} KB`;
   }
+  
+  // Show submitting message
+  statusMessage.textContent = 'Submitting your enquiry...';
+  statusMessage.style.color = '#333';
+  submitButton.disabled = true;
+});
 
-  // Collect all variants with quantities
-  const items = [];
+// Build detailed order information
+function buildOrderDetails() {
   const quantityInputs = document.querySelectorAll('.size-quantity-input');
-
+  let orderLines = [];
+  
   quantityInputs.forEach(input => {
     const qty = parseInt(input.value) || 0;
-    const variantId = parseInt(input.getAttribute('data-variant-id'));
     
-    if (qty > 0 && variantId) {
+    if (qty > 0) {
       const sizeItem = input.closest('.size-item');
       const color = sizeItem.getAttribute('data-color');
       const size = sizeItem.getAttribute('data-size');
-
-      items.push({
-        id: variantId,
-        quantity: qty,
-        properties: {
-          ...properties,
-          'Color': color,
-          'Size': size
-        }
-      });
+      const price = parseFloat(input.getAttribute('data-variant-price')) / 100;
+      const lineTotal = (qty * price).toFixed(2);
+      
+      orderLines.push(`${color} - ${size}: ${qty} units @ $${price.toFixed(2)} each = $${lineTotal}`);
     }
   });
-
-  if (items.length === 0) {
-    statusMessage.textContent = 'Please add quantities to at least one size.';
-    statusMessage.style.color = 'red';
-    return;
-  }
-
-  try {
-    statusMessage.textContent = 'Adding to cart...';
-    statusMessage.style.color = '#333';
-
-    const response = await fetch('/cart/add.js', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ items: items })
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || errorData.description || 'Failed to add to cart');
-    }
-
-    statusMessage.textContent = `Successfully added ${totalQuantity} items to cart!`;
-    statusMessage.style.color = 'green';
-
-    // Refresh cart
-    if (window.Shopify && Shopify.getCart) Shopify.getCart();
-    
-    // Reset form
-    setTimeout(() => {
-      location.reload();
-    }, 1500);
-
-  } catch (error) {
-    console.error(error);
-    statusMessage.textContent = 'Error: ' + error.message;
-    statusMessage.style.color = 'red';
-  }
-});
+  
+  return orderLines.join(' | ');
+}
 
 // Color swatch and size table management
 document.addEventListener('DOMContentLoaded', function() {
@@ -352,4 +301,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   updateSizeTables();
+  calculateTotals();
 });
